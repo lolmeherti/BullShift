@@ -19,7 +19,6 @@ class ContractType extends Model
         'contract_type',
         'min_hours_per_shift',
         'max_hours_per_week',
-        'days_of_service_per_week',
         'max_days_of_vacation_per_year',
     ];
 
