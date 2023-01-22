@@ -9,6 +9,14 @@
         <span class="sr-only">Dashboard</span>
     </a>
 
+    <slot
+        name="title"
+        x-show="isSidebarHovered || isSidebarOpen">
+        <p>
+            {{env('APP_NAME')}}
+        </p>
+    </slot>
+
     <!-- Toggle button -->
     <x-button
         type="button"
@@ -18,13 +26,15 @@
         x-show="isSidebarOpen || isSidebarHovered"
         x-on:click="isSidebarOpen = !isSidebarOpen"
     >
-        <x-icons.menu-fold-right
+
+
+        <x-clarity-pin-line
             x-show="!isSidebarOpen"
             aria-hidden="true"
             class="hidden w-6 h-6 lg:block"
         />
 
-        <x-icons.menu-fold-left
+        <x-clarity-pin-solid
             x-show="isSidebarOpen"
             aria-hidden="true"
             class="hidden w-6 h-6 lg:block"

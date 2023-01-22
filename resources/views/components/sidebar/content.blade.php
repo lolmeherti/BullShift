@@ -3,18 +3,15 @@
     aria-label="main"
     class="flex flex-col flex-1 gap-4 px-3"
 >
-
     <x-sidebar.link
         title="Dashboard"
         href="{{ route('dashboard') }}"
-        :isActive="request()->routeIs('dashboard')"
-    >
+        :isActive="request()->routeIs('dashboard')">
 
         <x-slot name="icon">
-            <x-heroicon-o-home
-                class="w-6 h-6 base"
-            />
+            <x-heroicon-o-home class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>
+
     </x-sidebar.link>
 
     <x-sidebar.dropdown
@@ -26,44 +23,66 @@
         </x-slot>
 
         <x-sidebar.sublink
-            title="Contract Types"
+            title="Contracts"
             href="{{ route('buttons.text') }}"
             :active="request()->routeIs('buttons.text')"
         />
         <x-sidebar.sublink
-            title="Job Designations"
+            title="Designations"
             href="{{ route('buttons.icon') }}"
             :active="request()->routeIs('buttons.icon')"
         />
         <x-sidebar.sublink
-            title="Invite Employees"
+            title="Invitations"
             href="{{ route('buttons.text-icon') }}"
             :active="request()->routeIs('buttons.text-icon')"
         />
     </x-sidebar.dropdown>
 
+{{--    <x-sidebar.dropdown--}}
+{{--        title="Management"--}}
+{{--        :active="Str::startsWith(request()->route()->uri(), 'buttons')"--}}
+{{--    >--}}
+{{--        <x-slot name="icon">--}}
+{{--            <x-clarity-administrator-line class="flex-shrink-0 w-6 h-6" aria-hidden="true" />--}}
+{{--        </x-slot>--}}
+
+{{--        <x-sidebar.sublink--}}
+{{--            title="Contracts"--}}
+{{--            href="#"--}}
+{{--        />--}}
+
+{{--        <x-sidebar.sublink--}}
+{{--            title="Nuttons2"--}}
+{{--            href="#"--}}
+{{--        />--}}
+
+{{--        <x-sidebar.sublink--}}
+{{--            title="Nuttons3"--}}
+{{--            href="#"--}}
+{{--        />--}}
+
+{{--    </x-sidebar.dropdown>--}}
+
     <x-sidebar.dropdown
-        title="Buttons"
+        title="Nuttons"
+
     >
-        <x-slot name="icon">
-            <x-heroicon-o-view-grid class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
-        </x-slot>
+        <x-sidebar.sublink
+            title="Nuttons1"
+            href="#"
+        />
 
         <x-sidebar.sublink
-            title="Text button"
-            href="{{ route('buttons.text') }}"
-
+            title="Nuttons2"
+            href="#"
         />
+
         <x-sidebar.sublink
-            title="Icon button"
-            href="{{ route('buttons.icon') }}"
-
+            title="Nuttons3"
+            href="#"
         />
-        <x-sidebar.sublink
-            title="Text with icon"
-            href="{{ route('buttons.text-icon') }}"
 
-        />
     </x-sidebar.dropdown>
 
 {{--    <div--}}
