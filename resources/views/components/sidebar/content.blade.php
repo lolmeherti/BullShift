@@ -15,7 +15,7 @@
     </x-sidebar.link>
 
     <x-sidebar.dropdown
-        title="Management"
+        title="Prepare"
         :active="Str::startsWith(request()->route()->uri(), 'buttons')"
     >
         <x-slot name="icon">
@@ -24,7 +24,7 @@
 
         <x-sidebar.sublink
             title="Contracts"
-            href="{{ route('buttons.text') }}"
+            href="{{ route('preparation.contracts.create') }}"
             :active="request()->routeIs('buttons.text')"
         />
         <x-sidebar.sublink
