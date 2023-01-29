@@ -28,8 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    //routes for contract type
+    Route::get('/contract', [ContractTypeController::class, 'index'])->name('preparation.contracts.index');
+    Route::get('/contract/create', [ContractTypeController::class, 'create'])->name('preparation.contracts.create');
 
-    Route::get('/contract', [ContractTypeController::class, 'create'])->name('preparation.contracts.create');
 });
 
 // useless routes
