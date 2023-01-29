@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     //routes for contract type
     Route::get('/contract', [ContractTypeController::class, 'index'])->name('preparation.contracts.index');
     Route::get('/contract/create', [ContractTypeController::class, 'create'])->name('preparation.contracts.create');
+    Route::post('/contract/store', [ContractTypeController::class, 'store'])->name('preparation.contracts.store');
 
 });
 
