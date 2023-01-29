@@ -50,8 +50,8 @@
 
                 <td class="px-6 py-4 text-right">
                     <div style ="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
-                        <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-yellow-600 text-purple-50 inline-block">
-                            <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-yellow-500 group-hover:h-full opacity-90"></span>
+                        <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium dark:bg-gray-700 bg-neutral-700 text-purple-50 inline-block">
+                            <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-neutral-600 dark:bg-gray-600 group-hover:h-full opacity-90"></span>
                             <span class="relative group-hover:text-white">Edit</span>
                         </a>
                         <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-red-600 text-purple-50 inline-block">
@@ -74,8 +74,8 @@
 
                 <td class="px-6 py-4 text-right">
                     <div style ="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
-                        <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-yellow-600 text-purple-50 inline-block">
-                            <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-yellow-500 group-hover:h-full opacity-90"></span>
+                        <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium dark:bg-gray-700 bg-neutral-700 text-purple-50 inline-block">
+                            <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-neutral-600 dark:bg-gray-600 group-hover:h-full opacity-90"></span>
                             <span class="relative group-hover:text-white">Edit</span>
                         </a>
                         <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-red-600 text-purple-50 inline-block">
@@ -97,10 +97,14 @@
                 </td>
                 <td class="px-6 py-4 text-right">
                     <div style ="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
-                        <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-yellow-600 text-purple-50 inline-block">
-                            <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-yellow-500 group-hover:h-full opacity-90"></span>
-                            <span class="relative group-hover:text-white">Edit</span>
+
+                        <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium dark:bg-gray-700 bg-neutral-700 text-purple-50 inline-block">
+                            <div class="grid grid-cols-1">
+                                <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-neutral-600 dark:bg-gray-600 group-hover:h-full opacity-90"></span>
+                                <span class="relative group-hover:text-white">Edit</span>
+                            </div>
                         </a>
+
                         <a href="#_" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-red-600 text-purple-50 inline-block">
                             <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-400 group-hover:h-full opacity-90"></span>
                             <span class="relative group-hover:text-white">Delete</span>
