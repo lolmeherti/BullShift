@@ -32,7 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/contract', [ContractTypeController::class, 'index'])->name('preparation.contracts.index');
     Route::get('/contract/create', [ContractTypeController::class, 'create'])->name('preparation.contracts.create');
     Route::post('/contract/store', [ContractTypeController::class, 'store'])->name('preparation.contracts.store');
-
+    Route::get('/contract/{contract}/edit', [ContractTypeController::class, 'edit']);
+    Route::post('/contract/{contract}/update', [ContractTypeController::class, 'update']);
 });
 
 // useless routes
