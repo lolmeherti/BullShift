@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->integer('user_fid');
             $table->string('contract_type');
-            $table->integer('min_hours_per_shift');
-            $table->integer('max_hours_per_week');
-            $table->integer('max_days_of_vacation_per_year');
+            $table->decimal('min_hours_per_shift');
+            $table->decimal('max_hours_per_week');
+            $table->integer('break_length_in_minutes');
+            $table->string('break_included');
+            $table->integer('days_of_vacation_per_year');
             $table->timestamps();
         });
     }
