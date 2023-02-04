@@ -70,45 +70,75 @@ class ContractTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ContractType  $contractType
+     * @param ContractType $contractType
      * @return Response
      */
     public function show(ContractType $contractType)
     {
         //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ContractType  $contractType
-     * @return Response
+     * @param ContractType $contract
+     * @return Application|Factory|View
      */
-    public function edit(ContractType $contractType)
+    public function edit(ContractType $contract): View|Factory|Application
     {
         //
+        return view('preparation.contracts.edit', compact('contract'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ContractType  $contractType
+     * @param ContractType $contract
      * @return Response
      */
-    public function update(Request $request, ContractType $contractType)
+    public function update(Request $request, ContractType $contract)
     {
-        //
+        $request->validate([
+            'contract_type' => 'required|max:255',
+            'hours_per_week' => 'decimal:0,1|max:120|required',
+            'min_shift_length' => 'integer|required|min:1|max:48',
+            'days_of_vacation_per_year' => 'integer|required',
+            'break_length' => 'integer|required'
+        ]);
+
+        $contract->user_fid = Auth::id();
+        $contract->contract_type = $request->contract_type;
+        $contract->min_hours_per_shift = $request->min_shift_length;
+        $contract->max_hours_per_week = $request->hours_per_week;
+        $contract->break_length_in_minutes = $request->break_length;
+        $contract->break_included = $request->break_included ?? "off";
+        $contract->days_of_vacation_per_year = $request->days_of_vacation_per_year;
+        $contract->update();
+
+        return redirect()->back()->withSuccess('Contract Type has been changed successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ContractType  $contractType
-     * @return \Illuminate\Http\Response
+     * @param ContractType $contractType
+     * @return Response
      */
     public function destroy(ContractType $contractType)
     {
         //
     }
+
+    /**
+     * Fetches all contract types.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllContractTypes(): \Illuminate\Support\Collection
+    {
+       return DB::table("contract_types")->get();
+    }
+
 }
