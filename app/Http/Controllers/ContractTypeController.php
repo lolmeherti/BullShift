@@ -57,8 +57,8 @@ class ContractTypeController extends Controller
         $contract = new ContractType();
         $contract->user_fid = Auth::id();
         $contract->contract_type = $request->contract_type;
-        $contract->min_hours_per_shift = $request->min_shift_length;
-        $contract->max_hours_per_week = $request->hours_per_week;
+        $contract->min_hours_per_shift = $request->min_shift_length + 0;
+        $contract->max_hours_per_week = $request->hours_per_week + 0;
         $contract->break_length_in_minutes = $request->break_length;
         $contract->break_included = $request->break_included ?? "off";
         $contract->days_of_vacation_per_year = $request->days_of_vacation_per_year;
