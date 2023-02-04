@@ -6,7 +6,11 @@ use App\Models\ContractType;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ContractTypeController extends Controller
 {
@@ -17,8 +21,10 @@ class ContractTypeController extends Controller
      */
     public function index()
     {
-        //
-        return view('preparation.contracts.index');
+        //fetching contract types
+        $contracts = $this->getAllContractTypes();
+
+        return view('preparation.contracts.index', compact('contracts'));
     }
 
     /**
@@ -36,18 +42,36 @@ class ContractTypeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'contract_type' => 'required|unique:contract_types|max:255',
+            'hours_per_week' => 'decimal:0,1|max:120|required',
+            'min_shift_length' => 'integer|required|min:1|max:48',
+            'days_of_vacation_per_year' => 'integer|required',
+            'break_length' => 'integer|required'
+        ]);
+
+        $contract = new ContractType();
+        $contract->user_fid = Auth::id();
+        $contract->contract_type = $request->contract_type;
+        $contract->min_hours_per_shift = $request->min_shift_length;
+        $contract->max_hours_per_week = $request->hours_per_week;
+        $contract->break_length_in_minutes = $request->break_length;
+        $contract->break_included = $request->break_included ?? "off";
+        $contract->days_of_vacation_per_year = $request->days_of_vacation_per_year;
+        $contract->save();
+
+        return redirect()->back()->withSuccess('Contract Type has been created successfully!');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\ContractType  $contractType
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(ContractType $contractType)
     {
@@ -58,7 +82,7 @@ class ContractTypeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\ContractType  $contractType
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(ContractType $contractType)
     {
@@ -70,7 +94,7 @@ class ContractTypeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\ContractType  $contractType
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, ContractType $contractType)
     {
