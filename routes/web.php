@@ -29,11 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //routes for contract type
-    Route::get('/contract', [ContractTypeController::class, 'index'])->name('preparation.contracts.index');
+    Route::get('/contracts', [ContractTypeController::class, 'index'])->name('preparation.contracts.index');
     Route::get('/contract/create', [ContractTypeController::class, 'create'])->name('preparation.contracts.create');
     Route::post('/contract/store', [ContractTypeController::class, 'store'])->name('preparation.contracts.store');
     Route::get('/contract/{contract}/edit', [ContractTypeController::class, 'edit']);
     Route::post('/contract/{contract}/update', [ContractTypeController::class, 'update']);
+    Route::post('/contract/delete', [ContractTypeController::class, 'destroy']);
 });
 
 // useless routes
