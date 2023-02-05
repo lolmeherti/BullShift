@@ -103,9 +103,9 @@
             </tr>
             </thead>
             <tbody>
-
             @foreach($contracts as $contract)
-                <tr class="bg-white border-b dark:bg-dark-eval-1 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:bg-opacity-70 hover:bg-gray-100  hover:bg-opacity-50">
+                <tr class="bg-white border-b dark:bg-dark-eval-1 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:bg-opacity-70 hover:bg-gray-100  hover:bg-opacity-50"
+                id="table_row_id{{$contract->id}}">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-white">
                         {{$contract->contract_type}}
                     </th>
@@ -117,15 +117,18 @@
                     <td class="px-6 py-4">
                         0
                     </td>
-
                     <td class="px-6 py-4 text-right">
-                        <div style ="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
-                            <a href="{{url('/contract/'.$contract->id.'/edit')}}" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium dark:bg-gray-700 bg-neutral-700 text-purple-50 inline-block">
-                                <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-neutral-600 dark:bg-gray-600 group-hover:h-full opacity-90"></span>
+                        <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
+                            <a href="{{url('/contract/'.$contract->id.'/edit')}}"
+                               class="px-5 py-1.5 relative rounded group overflow-hidden font-medium dark:bg-gray-700 bg-neutral-700 text-purple-50 inline-block">
+                                <span
+                                    class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-neutral-600 dark:bg-gray-600 group-hover:h-full opacity-90"></span>
                                 <span class="relative group-hover:text-white">Edit</span>
                             </a>
-                            <a href="#_" id="delete" class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-red-600 text-purple-50 inline-block">
-                                <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-400 group-hover:h-full opacity-90"></span>
+                            <a href="#" id="delete" onclick="deleteConfirmation({{$contract->id}}, '{{$contract->contract_type}}')"
+                               class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-red-600 text-purple-50 inline-block">
+                                <span
+                                    class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-red-400 group-hover:h-full opacity-90"></span>
                                 <span class="relative group-hover:text-white">Delete</span>
                             </a>
                         </div>
@@ -137,3 +140,53 @@
     </div>
 
 </x-app-layout>
+
+<script>
+    let deleteConfirmation = (id, name) =>
+    {
+        let deletionText = "Warning: this action is permanent! Do you wish to delete ";
+        document.getElementById("deletion_warning").innerHTML = deletionText + name + "?";
+
+        var element = document.getElementById("popup-modal");
+        element.classList.remove("hidden");
+
+        document.getElementById("pending_deletion_id").value = id;
+    }
+
+    let closeModal = () =>
+    {
+        var element = document.getElementById("popup-modal");
+        element.classList.add("hidden");
+
+        document.getElementById("pending_deletion_id").value = "";
+    }
+
+    let deleteRequest = () =>
+    {
+        let id = document.getElementById("pending_deletion_id").value;
+
+        document.getElementById("consent_to_deletion_button").classList.add("hidden");
+        document.getElementById("deletion_cancel_button").classList.add("hidden");
+        document.getElementById("deletion_spinner").classList.remove("hidden");
+
+        axios.post('/contract/delete', {
+            contractId: id
+        }, {
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                closeModal();
+                document.getElementById("table_row_id"+id).remove();
+                document.getElementById("consent_to_deletion_button").classList.remove("hidden");
+                document.getElementById("deletion_cancel_button").classList.remove("hidden");
+                document.getElementById("deletion_spinner").classList.add("hidden");
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+</script>
