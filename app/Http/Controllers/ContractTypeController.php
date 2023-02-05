@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ContractTypeController extends Controller
 {
@@ -123,12 +124,15 @@ class ContractTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param ContractType $contractType
+     * @param Request $request
      * @return Response
      */
-    public function destroy(ContractType $contractType)
+    public function destroy(Request $request)
     {
-        //
+        if($request->contractId)
+        {
+            ContractType::destroy($request->contractId);
+        }
     }
 
     /**
@@ -140,5 +144,4 @@ class ContractTypeController extends Controller
     {
        return DB::table("contract_types")->get();
     }
-
 }
