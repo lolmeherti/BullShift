@@ -22,7 +22,7 @@
                 <label for="contract_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contract Type <span class="text-gray-600 dark:text-gray-400" style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
 
                 @if ($errors->has('contract_type'))
-                    <input type="text" id="contract_type" value="{{old('')}}" maxlength="70" name="contract_type" class="bg-red-100 border border-red-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-red-200 dark:border-red-500 dark:placeholder-gray-400 dark:text-gray-600 dark:focus:ring-purple-500 dark:focus:border-purple-500"
+                    <input type="text" id="contract_type" value="{{old('contract_type')}}" maxlength="70" name="contract_type" class="bg-red-100 border border-red-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-red-200 dark:border-red-500 dark:placeholder-gray-400 dark:text-gray-600 dark:focus:ring-purple-500 dark:focus:border-purple-500"
                            placeholder="Full-Time" required>
                     <span class="text-red-500">{{ $errors->first('contract_type') }}</span>
                 @else
