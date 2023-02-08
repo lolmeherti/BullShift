@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContractTypeController;
+use App\Http\Controllers\JobDesignationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -24,17 +25,35 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //ROUTES FOR PROFILE SETTINGS
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //routes for contract type
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //ROUTES FOR CONTRACT TYPES
     Route::get('/contracts', [ContractTypeController::class, 'index'])->name('preparation.contracts.index');
     Route::get('/contract/create', [ContractTypeController::class, 'create'])->name('preparation.contracts.create');
     Route::post('/contract/store', [ContractTypeController::class, 'store'])->name('preparation.contracts.store');
     Route::get('/contract/{contract}/edit', [ContractTypeController::class, 'edit']);
     Route::post('/contract/{contract}/update', [ContractTypeController::class, 'update']);
     Route::post('/contract/delete', [ContractTypeController::class, 'destroy']);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //ROUTES FOR JOB DESIGNATIONS
+    Route::get('/designations', [JobDesignationController::class, 'index'])->name('preparation.designations.index');
+    Route::get('/designation/create', [JobDesignationController::class, 'create'])->name('preparation.designations.create');
+    Route::post('/designation/store', [JobDesignationController::class, 'store'])->name('preparation.designations.store');
+    Route::get('/designation/{jobDesignation}/edit', [JobDesignationController::class, 'edit']);
+    Route::post('/designation/{jobDesignation}/update', [JobDesignationController::class, 'update']);
+    Route::post('/designation/delete', [JobDesignationController::class, 'destroy']);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 });
 
 // useless routes
