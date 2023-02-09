@@ -1,7 +1,12 @@
+
+@php
+ use \App\Models\Theme;
+@endphp
+
 <nav
     aria-label="secondary"
     x-data="{ open: false }"
-    class="sticky top-0 z-10 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white dark:bg-dark-eval-1"
+    class="sticky top-0 z-10 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 {{Theme::BRIGHT_NAV_TOP_BAR_COLOR}} {{Theme::DARK_NAV_TOP_BAR_COLOR}}"
     :class="{
         '-translate-y-full': scrollingDown,
         'translate-y-0': scrollingUp,
@@ -10,7 +15,7 @@
     <div class="flex items-center gap-3">
         <x-button
             type="button"
-            class="md:hidden"
+            class="md:hidden bg-opacity-0"
             icon-only
             variant="secondary"
             sr-text="Toggle dark mode"
@@ -33,7 +38,7 @@
     <div class="flex items-center gap-3">
         <x-button
             type="button"
-            class="hidden md:inline-flex"
+            class="hidden md:inline-flex bg-opacity-0"
             icon-only
             variant="secondary"
             sr-text="Toggle dark mode"
@@ -101,7 +106,7 @@
 
 <!-- Mobile bottom bar -->
 <div
-    class="fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white md:hidden dark:bg-dark-eval-1"
+    class="fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 md:hidden {{Theme::BRIGHT_NAV_TOP_BAR_COLOR}} {{Theme::DARK_NAV_TOP_BAR_COLOR}}"
     :class="{
         'translate-y-full': scrollingDown,
         'translate-y-0': scrollingUp,

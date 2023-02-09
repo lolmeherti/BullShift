@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Theme extends Model
 {
     use HasFactory;
+    ///////////////////////////BACKGROUND, NAV,SIDE BAR AND BOTTOM////////////////////////////////
+    //TOP NAV BAR
+    public const DARK_NAV_TOP_BAR_COLOR = 'dark:bg-dark-eval-1';
+    public const BRIGHT_NAV_TOP_BAR_COLOR = 'bg-gray-50';
+
+    ///////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////MODAL STYLES////////////////////////////////
     //MODAL BACKGROUND COLORS
