@@ -7,7 +7,7 @@
 @php
     use \App\Models\Theme;
 
-    $isActiveClasses =  $isActive ? 'text-white '.Theme::ACTIVE_CATEGORY_COLOR.' shadow-lg '.Theme::ACTIVE_CATEGORY_HOVER_COLOR : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2';
+    $isActiveClasses =  $isActive ? 'text-white bg-purple-500 shadow-lg hover:bg-purple-400' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-gray-300 dark:hover:bg-dark-eval-2';
 
     $classes = 'flex-shrink-0 flex items-center gap-2 p-2 transition-colors rounded-md overflow-hidden ' . $isActiveClasses;
 
@@ -36,12 +36,12 @@
         >
             <span
                 :class="open ? '-rotate-45' : 'rotate-45'"
-                class="absolute right-[9px] {{Theme::BRIGHT_SIDEBAR_ARROW_COLOR}} mt-[-5px] h-2 w-[2px] top-1/2 transition-all duration-200"
+                class="absolute right-[9px] bg-gray-400 mt-[-5px] h-2 w-[2px] top-1/2 transition-all duration-200"
             ></span>
 
             <span
                 :class="open ? 'rotate-45' : '-rotate-45'"
-                class="absolute left-[9px] {{Theme::BRIGHT_SIDEBAR_ARROW_COLOR}} mt-[-5px] h-2 w-[2px] top-1/2 transition-all duration-200"
+                class="absolute left-[9px] bg-gray-400 mt-[-5px] h-2 w-[2px] top-1/2 transition-all duration-200"
             ></span>
         </span>
     </button>

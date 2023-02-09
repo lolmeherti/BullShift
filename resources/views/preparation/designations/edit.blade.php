@@ -5,15 +5,14 @@
     </x-slot>
 
     @php
-        $theme = new \App\Models\Theme();
-        $normalFormInputTheme = \App\Models\Theme::compileFormInputTheme();
-        $alertFormInputTheme = \App\Models\Theme::compileFormInputTheme($alert = true);
+        $normalFormInputTheme = 'border dark:bg-gray-700 dark:border-gray-600 border-gray-300 dark:text-white bg-gray-100 dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 focus:ring-purple-500 focus:border-purple-500 text-gray-900';
+        $alertFormInputTheme = 'border bg-red-100 text-gray-700 border-red-300 dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 focus:ring-purple-500 focus:border-purple-500 text-gray-900';
     @endphp
 
-    <div class="p-6 overflow-hidden {{$theme::BRIGHT_FORM_FOREGROUND_COLOR}} {{$theme::DARK_FORM_FOREGROUND_COLOR}} rounded-md shadow-md">
+    <div class="p-6 overflow-hidden bg-gray-50 dark:bg-dark-eval-1 rounded-md shadow-md">
         <form autocomplete="off" method="POST" action="{{url('/designation/'.$jobDesignation->id.'/update')}}">
             @csrf
-            <caption class="{{$theme::BRIGHT_TEXT_COLOR}} {{$theme::DARK_TEXT_COLOR}} {{$theme::BRIGHT_FORM_FOREGROUND_COLOR}} {{$theme::DARK_FORM_FOREGROUND_COLOR}} text-xl font-bold text-left">
+            <caption class="text-gray-900 dark:text-white bg-gray-50 dark:bg-dark-eval-1 text-xl font-bold text-left">
                 <p class="text-xl font-semibold">
                     Editing a Job Designation
                 @if(session('success'))
@@ -25,14 +24,14 @@
 
             </div>
             <div class="mb-6">
-                <label for="contract_type" class="{{$theme::BRIGHT_TEXT_COLOR}} {{$theme::DARK_TEXT_COLOR}} block mb-2 text-sm font-medium">Designation
+                <label for="contract_type" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Designation
                     <span class="text-gray-600 dark:text-gray-400"
                           style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
 
                 @if ($errors->has('designation'))
                     <input type="text" id="designation" value="{{old('designation')}}" maxlength="70" name="designation"
                            class="{{$alertFormInputTheme}} text-sm rounded-lg block w-full p-2.5"
-                           placeholder="Full-Time" required>
+                           placeholder="Accountant" required>
                     <span class="text-red-500">{{ $errors->first('designation') }}</span>
                 @else
                     <input type="text" id="designation" value="{{$jobDesignation->designation}}" maxlength="70"
@@ -43,7 +42,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="contract_type_fid" class="{{$theme::BRIGHT_TEXT_COLOR}} {{$theme::DARK_TEXT_COLOR}} block mb-2 text-sm font-medium">Contract
+                <label for="contract_type_fid" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Contract
                     Type <span class="text-gray-600 dark:text-gray-400"
                                style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
 
@@ -68,9 +67,9 @@
             <td class="px-6 py-4 text-right">
                 <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end py-4">
                     <button type="submit"
-                            class="px-5 py-1.5 relative rounded group overflow-hidden font-medium {{$theme::SUBMIT_BUTTON_COLOR}} text-purple-50 inline-block">
+                            class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-green-600 text-purple-50 inline-block">
                         <span
-                            class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 {{$theme::SUBMIT_BUTTON_HOVER_COLOR}} group-hover:h-full opacity-90"></span>
+                            class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-green-500 group-hover:h-full opacity-90"></span>
                         <span class="relative group-hover:text-white">Submit</span>
                     </button>
                 </div>

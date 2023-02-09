@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @php
-    use \App\Models\Theme;
-    @endphp
-
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -36,7 +31,7 @@
     x-on:resize.window="handleWindowResize"
     x-cloak
 >
-    <div class="min-h-screen text-gray-900 {{Theme::BRIGHT_BACKGROUND_COLOR}} {{Theme::DARK_BACKGROUND_COLOR}}  dark:text-gray-200">
+    <div class="min-h-screen text-gray-900 bg-gray-200 dark:bg-dark-eval-0 dark:text-gray-200">
         <!-- Sidebar -->
         <x-sidebar.sidebar/>
 

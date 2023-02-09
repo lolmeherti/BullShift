@@ -27,18 +27,13 @@
             }
         }
     </style>
-    @php
-        $theme = new \App\Models\Theme();
-        $normalFormInputTheme = \App\Models\Theme::compileFormInputTheme();
-        $alertFormInputTheme = \App\Models\Theme::compileFormInputTheme($alert = true);
-    @endphp
 
-    <dialog id="myModal" class="h-1/4 w-1/4  {{$theme::BRIGHT_MODAL_BACKGROUND_COLOR}} {{$theme::DARK_MODAL_BACKGROUND_COLOR}} rounded-md {{$theme::MODAL_BORDER}} {{$theme::BRIGHT_MODAL_BORDER_COLOR}} {{$theme::DARK_MODAL_BORDER_COLOR}}">
+    <dialog id="myModal" class="h-1/4 w-1/4  bg-gray-100 dark:bg-dark-eval-1 rounded-md border border-neutral-700 dark:border-neutral-700">
         <div class="flex flex-col w-full h-auto ">
             <!-- Header -->
             <div class="flex w-full h-auto justify-center items-center">
                 <div
-                    class="flex w-10/12 h-auto py-3 justify-center items-center text-2xl font-bold {{$theme::BRIGHT_MODAL_HEADER_COLOR}} {{$theme::DARK_MODAL_HEADER_COLOR}}"
+                    class="flex w-10/12 h-auto py-3 justify-center items-center text-2xl font-bold text-gray-600 dark:text-gray-100"
                     id="deletion_warning">
                     Modal Header
                 </div>
@@ -46,7 +41,7 @@
                 <!--Header End-->
             </div>
             <!-- Modal Content-->
-            <div class="justify-center items-center rounded text-center {{$theme::DARK_MODAL_SUBTEXT_COLOR}} {{$theme::BRIGHT_MODAL_SUBTEXT_COLOR}}">
+            <div class="justify-center items-center rounded text-center dark:text-gray-400 text-gray-400">
                 This action is permanent. Are you sure you want to proceed?
             </div>
             <div class="flex w-full h-auto py-10 px-2 justify-center items-center rounded text-center text-gray-500">
@@ -67,17 +62,17 @@
 
                     <a href="#" id="consent_to_deletion_button" data-modal-hide="popup-modal" type="button"
                        onclick="deleteRequest()"
-                       class="px-5 py-1.5 relative rounded group overflow-hidden font-medium {{$theme::BRIGHT_DELETE_BUTTON_COLOR}} {{$theme::DARK_DELETE_BUTTON_COLOR}} text-purple-50 inline-block">
+                       class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-purple-500 dark:bg-red-500 text-purple-50 inline-block">
                             <span
-                                class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 {{$theme::BRIGHT_DELETE_BUTTON_HOVER_COLOR}} {{$theme::DARK_DELETE_BUTTON_HOVER_COLOR}} group-hover:h-full opacity-90"></span>
+                                class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-400 dark:bg-red-400 group-hover:h-full opacity-90"></span>
                         <span class="relative group-hover:text-white"> Yes, I'm sure</span>
                     </a>
 
                     <a href="#" data-modal-hide="popup-modal" id="deletion_cancel_button" type="button"
                        onclick="closeModal()"
-                       class="px-5 py-1.5 relative rounded group overflow-hidden font-medium {{$theme::BRIGHT_MODAL_CANCEL_BUTTON_COLOR}} {{$theme::DARK_MODAL_CANCEL_BUTTON_COLOR}} text-purple-50 inline-block">
+                       class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-neutral-600 dark:bg-gray-600 text-purple-50 inline-block">
                                 <span
-                                    class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 {{$theme::BRIGHT_MODAL_CANCEL_HOVER_BUTTON_COLOR}} {{$theme::DARK_MODAL_CANCEL_HOVER_BUTTON_COLOR}} group-hover:h-full opacity-90"></span>
+                                    class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-neutral-500 dark:bg-gray-500 group-hover:h-full opacity-90"></span>
                         <span class="relative group-hover:text-white">No, cancel</span>
                     </a>
                 </div>
@@ -94,17 +89,17 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg flex items-stretch">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <caption
-                class="p-5 text-xl font-semibold text-left {{$theme::BRIGHT_TABLE_BG_COLOR}} {{$theme::DARK_TABLE_BG_COLOR}} {{$theme::DARK_TEXT_COLOR}} {{$theme::BRIGHT_TEXT_COLOR}}">
+                class="p-5 text-xl font-semibold text-left bg-gray-50 dark:bg-dark-eval-1 dark:text-white text-gray-900">
                 Contract Types
                 <div class="grid grid-cols-2">
 
                     <div id="paragraph" class="col-start-1 col-end-2">
-                        <p class="mt-1 text-sm font-normal {{$theme::BRIGHT_TABLE_SUBTEXT_COLOR}} {{$theme::DARK_TABLE_SUBTEXT_COLOR}}">Create and manage
+                        <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Create and manage
                             employment contracts.</p>
                     </div>
                     <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
                         <a href="{{route('preparation.contracts.create')}}"
-                           class="px-5 py-1.5 relative rounded group overflow-hidden font-medium {{$theme::NEW_BUTTON_BACKGROUND_COLOR}} text-purple-50 inline-block">
+                           class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-green-700 text-purple-50 inline-block">
                             <span
                                 class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-green-600 group-hover:h-full opacity-90"></span>
                             <span class="relative group-hover:text-white">New</span>
@@ -113,7 +108,7 @@
                 </div>
 
             </caption>
-            <thead class="text-sm text-gray-100 uppercase {{$theme::BRIGHT_TABLE_HEADER_BG_COLOR}} {{$theme::DARK_TABLE_HEADER_BG_COLOR}} {{$theme::BRIGHT_TABLE_COLUMN_HEADER_COLOR}} {{$theme::DARK_TABLE_COLUMN_HEADER_COLOR}} ">
+            <thead class="text-sm text-gray-100 uppercase bg-neutral-600 dark:bg-gray-700 text-gray-100 dark:text-gray-200">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Contract
@@ -147,7 +142,7 @@
                     <td class="px-6 py-4 text-right">
                         <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
                             <a href="{{url('/contract/'.$contract->id.'/edit')}}"
-                               class="px-5 py-1.5 relative rounded group overflow-hidden font-medium text-purple-50 {{$theme::BRIGHT_EDIT_BUTTON_COLOR}} {{$theme::DARK_EDIT_BUTTON_COLOR}} inline-block">
+                               class="px-5 py-1.5 relative rounded group overflow-hidden font-medium text-purple-50 bg-neutral-600 dark:bg-gray-700 inline-block">
                                 <span
                                     class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-neutral-500 dark:bg-gray-600 group-hover:h-full opacity-90"></span>
                                 <span class="relative group-hover:text-white">Edit</span>
@@ -155,9 +150,9 @@
 
                             <a href="#" id="delete"
                                onclick="deleteConfirmation({{$contract->id}}, '{{$contract->contract_type}}')"
-                               class="px-5 py-1.5 relative rounded group overflow-hidden font-medium {{$theme::BRIGHT_DELETE_BUTTON_COLOR}} {{$theme::DARK_DELETE_BUTTON_COLOR}} text-purple-50 inline-block">
+                               class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-purple-500 dark:bg-red-500 text-purple-50 inline-block">
                                 <span
-                                    class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 {{$theme::BRIGHT_DELETE_BUTTON_HOVER_COLOR}} {{$theme::DARK_DELETE_BUTTON_HOVER_COLOR}} group-hover:h-full opacity-90"></span>
+                                    class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-400 dark:bg-red-400 group-hover:h-full opacity-90"></span>
                                 <span class="relative group-hover:text-white">Delete</span>
                             </a>
                         </div>
