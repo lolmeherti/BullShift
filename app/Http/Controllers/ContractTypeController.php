@@ -6,12 +6,10 @@ use App\Models\ContractType;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ContractTypeController extends Controller
 {
@@ -140,7 +138,7 @@ class ContractTypeController extends Controller
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getAllContractTypes(): \Illuminate\Support\Collection
+    public static function getAllContractTypes(): \Illuminate\Support\Collection
     {
        return DB::table("contract_types")->get();
     }
