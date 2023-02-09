@@ -9,15 +9,21 @@ class Theme extends Model
 {
     use HasFactory;
     ///////////////////////////BACKGROUND, NAV,SIDE BAR AND BOTTOM////////////////////////////////
+    //BACKGROUND COLORS
+    public const BRIGHT_BACKGROUND_COLOR = 'bg-gray-200';
+    public const DARK_BACKGROUND_COLOR = 'dark:bg-dark-eval-0';
+
     //TOP NAV BAR
     public const DARK_NAV_TOP_BAR_COLOR = 'dark:bg-dark-eval-1';
     public const BRIGHT_NAV_TOP_BAR_COLOR = 'bg-gray-50';
+
     //SIDE BAR ARROW COLORS
     public const BRIGHT_SIDEBAR_ARROW_COLOR = 'bg-gray-400';
-    public const DARK_SIDEBAR_ARROW_COLOR = 'dark:bg-gray-100';
+
     //ACTIVE CATEGORY COLORS
     public const ACTIVE_CATEGORY_COLOR = 'bg-purple-500';
     public const ACTIVE_CATEGORY_HOVER_COLOR = 'hover:bg-purple-400';
+    
     //SIDE BAR BG COLORS
     public const BRIGHT_SIDEBAR_BG_COLOR = self::DARK_NAV_TOP_BAR_COLOR;
     public const DARK_SIDEBAR_BG_COLOR = self::BRIGHT_NAV_TOP_BAR_COLOR;
