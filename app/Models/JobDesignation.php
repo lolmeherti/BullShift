@@ -9,6 +9,11 @@ class JobDesignation extends Model
 {
     use HasFactory;
 
+    public function contractType()
+    {
+        return $this->belongsTo(ContractType::class, 'contract_type_fid', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

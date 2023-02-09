@@ -9,6 +9,11 @@ class ContractType extends Model
 {
     use HasFactory;
 
+    public function jobDesignations()
+    {
+        return $this->hasMany(JobDesignation::class, 'contract_type_fid', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
