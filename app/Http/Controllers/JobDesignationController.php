@@ -114,7 +114,7 @@ class JobDesignationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param JobDesignation $jobDesignation
+     * @param Request $request
      * @return Response
      */
     public function destroy(Request $request)
@@ -133,8 +133,9 @@ class JobDesignationController extends Controller
      */
     public function getAllJobDesignationsWithContract(): Collection
     {
-        return  DB::table("contract_types")
-            ->leftjoin('job_designations', 'job_designations.contract_type_fid', '=', 'contract_types.id')
+        return DB::table('job_designations')
+            ->leftJoin('contract_types', 'job_designations.contract_type_fid', '=', 'contract_types.id')
+            ->select('job_designations.*', 'contract_types.contract_type')
             ->get();
     }
 }
