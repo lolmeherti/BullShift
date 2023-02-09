@@ -16,7 +16,7 @@
 
     <x-sidebar.dropdown
         title="Prepare"
-        :active="Str::startsWith(request()->route()->uri(), 'contract')"
+        :active="Str::startsWith(request()->route()->uri(), ['contract', 'designation', 'invitation'])"
     >
         <x-slot name="icon">
             <x-clarity-administrator-line class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
@@ -29,8 +29,8 @@
         />
         <x-sidebar.sublink
             title="Designations"
-            href="{{ route('buttons.icon') }}"
-            :active="request()->routeIs('buttons.icon')"
+            href="{{ route('preparation.designations.index') }}"
+            :active="request()->routeIs('preparation.designations.index')"
         />
         <x-sidebar.sublink
             title="Invitations"
@@ -39,34 +39,8 @@
         />
     </x-sidebar.dropdown>
 
-{{--    <x-sidebar.dropdown--}}
-{{--        title="Management"--}}
-{{--        :active="Str::startsWith(request()->route()->uri(), 'buttons')"--}}
-{{--    >--}}
-{{--        <x-slot name="icon">--}}
-{{--            <x-clarity-administrator-line class="flex-shrink-0 w-6 h-6" aria-hidden="true" />--}}
-{{--        </x-slot>--}}
-
-{{--        <x-sidebar.sublink--}}
-{{--            title="Contracts"--}}
-{{--            href="#"--}}
-{{--        />--}}
-
-{{--        <x-sidebar.sublink--}}
-{{--            title="Nuttons2"--}}
-{{--            href="#"--}}
-{{--        />--}}
-
-{{--        <x-sidebar.sublink--}}
-{{--            title="Nuttons3"--}}
-{{--            href="#"--}}
-{{--        />--}}
-
-{{--    </x-sidebar.dropdown>--}}
-
     <x-sidebar.dropdown
         title="Nuttons"
-
     >
         <x-sidebar.sublink
             title="Nuttons1"
@@ -84,21 +58,4 @@
         />
 
     </x-sidebar.dropdown>
-
-{{--    <div--}}
-{{--        x-transition--}}
-{{--        x-show="isSidebarOpen || isSidebarHovered"--}}
-{{--        class="text-sm text-gray-500"--}}
-{{--    >--}}
-{{--        Dummy Links--}}
-{{--    </div>--}}
-
-{{--    @php--}}
-{{--        $links = array_fill(0, 20, '');--}}
-{{--    @endphp--}}
-
-{{--    @foreach ($links as $index => $link)--}}
-{{--        <x-sidebar.link title="Dummy link {{ $index + 1 }}" href="#" />--}}
-{{--    @endforeach--}}
-
 </x-perfect-scrollbar>
