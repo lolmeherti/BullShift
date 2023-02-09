@@ -13,12 +13,13 @@
         name="title"
         x-show="isSidebarHovered || isSidebarOpen">
         <p>
-            {{env('APP_NAME')}}
+            {{ env('APP_NAME') }}
         </p>
     </slot>
 
     <!-- Toggle button -->
     <x-button
+        class="bg-opacity-0"
         type="button"
         icon-only
         sr-text="Toggle sidebar"
@@ -26,7 +27,6 @@
         x-show="isSidebarOpen || isSidebarHovered"
         x-on:click="isSidebarOpen = !isSidebarOpen"
     >
-
 
         <x-clarity-pin-line
             x-show="!isSidebarOpen"
