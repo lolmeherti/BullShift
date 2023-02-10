@@ -6,8 +6,10 @@ use App\Models\ContractType;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -123,22 +125,28 @@ class ContractTypeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse|void
      */
     public function destroy(Request $request)
     {
-        if($request->contractId)
-        {
-            ContractType::destroy($request->contractId);
+        $contract = ContractType::find($request->id);
+
+        $contractDesignationsCount = $contract->jobDesignations->count();
+
+        if ($contractDesignationsCount > 0 && !$request->deleteAnyway) {
+            return response()->json(['dependency' => 'This contract is associated with job designations. Please remove all association before deleting the contract.']);
+        } else {
+            $contract->delete();
+            return redirect()->back()->with('success','Contract type deleted successfully.');
         }
     }
 
     /**
      * Fetches all contract types.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
-    public static function getAllContractTypes(): \Illuminate\Support\Collection
+    public static function getAllContractTypes(): Collection
     {
        return DB::table("contract_types")->get();
     }
