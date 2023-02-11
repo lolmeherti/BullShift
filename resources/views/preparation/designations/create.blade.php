@@ -63,6 +63,8 @@
                         <span class="relative group-hover:text-white">Submit</span>
                     </button>
                 </div>
+            </td>
+
         </form>
     </div>
 </x-app-layout>
