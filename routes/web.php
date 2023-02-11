@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContractTypeController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\JobDesignationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -44,6 +45,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/contract/delete', [ContractTypeController::class, 'destroy']);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //ROUTES FOR DEPARTMENTS
+    Route::get('/departments', [DepartmentController::class, 'index'])->name('preparation.departments.index');
+    Route::get('/department/create', [DepartmentController::class, 'create'])->name('preparation.departments.create');
+    Route::post('/department/store', [DepartmentController::class, 'store'])->name('preparation.departments.store');
+    Route::get('/department/{department}/edit', [DepartmentController::class, 'edit']);
+    Route::post('/department/{department}/update', [DepartmentController::class, 'update']);
+    Route::post('/department/delete', [DepartmentController::class, 'destroy']);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //ROUTES FOR JOB DESIGNATIONS
