@@ -16,7 +16,7 @@
 
     <x-sidebar.dropdown
         title="Prepare"
-        :active="Str::startsWith(request()->route()->uri(), ['contract', 'designation', 'invitation'])"
+        :active="Str::startsWith(request()->route()->uri(), ['contract', 'designation', 'invitation', 'department'])"
     >
         <x-slot name="icon">
             <x-clarity-administrator-line class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
@@ -26,6 +26,11 @@
             title="Contracts"
             href="{{ route('preparation.contracts.index') }}"
             :active="request()->routeIs('preparation.contracts.index')"
+        />
+        <x-sidebar.sublink
+            title="Departments"
+            href="{{ route('preparation.departments.index') }}"
+            :active="request()->routeIs('preparation.departments.index')"
         />
         <x-sidebar.sublink
             title="Designations"
