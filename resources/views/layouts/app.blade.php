@@ -24,10 +24,14 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- delete modal functionality -->
+    <script type="text/javascript" src="{{ asset('js/delete_modal_functionality.js') }}"></script>
 </head>
 
 
 <body class="font-sans antialiased">
+
 <div
     x-data="mainState"
     :class="{ dark: isDarkMode }"
@@ -71,5 +75,6 @@
 
 <!--FLOWBITE-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+
 </body>
 </html>
