@@ -12,9 +12,7 @@
     <slot
         name="title"
         x-show="isSidebarHovered || isSidebarOpen">
-        <p>
-            {{ env('APP_NAME') }}
-        </p>
+            {{config('app.name')}}
     </slot>
 
     <!-- Toggle button -->
