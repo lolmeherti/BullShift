@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
 
 class DepartmentController extends Controller
 {
@@ -32,19 +34,32 @@ class DepartmentController extends Controller
     public function create(): View|Factory|Application
     {
         //
-        $contractTypes = [''];
-        return view('preparation.departments.create', compact('contractTypes'));
+
+        $users = User::all();
+
+        return view('preparation.departments.create', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'department' => 'required|max:255',
+        ]);
+
+        $department = new Department();
+        $department->department = $request->department;
+        $department->manager_name = $request->manager_name;
+        $department->manager_user_fid = (int) $request->manager_user_fid ?? null;
+
+        $department->save();
+
+        return redirect()->back()->withSuccess('Department has been created successfully!');
     }
 
     /**
@@ -62,34 +77,68 @@ class DepartmentController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Department  $department
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function edit(Department $department)
+    public function edit(Department $department): View|Factory|Application
     {
         //
+        $users = User::all();
+
+        return view('preparation.departments.edit', compact('users', 'department'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\Models\Department  $department
      * @return Response
      */
     public function update(Request $request, Department $department)
     {
         //
+        $request->validate([
+            'department' => 'required|max:255',
+        ]);
+
+        $department->department = $request->department;
+        $department->manager_name = $request->manager_name;
+        $department->manager_user_fid = (int) $request->manager_user_fid ?? null;
+
+        $department->save();
+
+        return redirect()->back()->withSuccess('Department has been edited successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Department  $department
-     * @return Response
+     * @param Request $request
+     * @return void
      */
-    public function destroy(Department $department)
+    public function destroy(Request $request)
     {
         //
+        if($request->id)
+        {
+            Department::destroy($request->id);
+        }
+    }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = time() . '.' . $image->getClientOriginalExtension();
+
+            $img = Image::make($image->getRealPath());
+            $img->save(public_path('images/' . $fileName));
+
+            return back()->with('success', 'Image uploaded successfully!');
+        }
+
+        return back()->with('error', 'Please select an image to upload.');
     }
 
     public function getAllDepartments(): \Illuminate\Support\Collection
