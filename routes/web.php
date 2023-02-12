@@ -46,6 +46,16 @@ Route::middleware('auth')->group(function () {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //ROUTES FOR JOB DESIGNATIONS
+    Route::get('/designations', [JobDesignationController::class, 'index'])->name('preparation.designations.index');
+    Route::get('/designation/create', [JobDesignationController::class, 'create'])->name('preparation.designations.create');
+    Route::post('/designation/store', [JobDesignationController::class, 'store'])->name('preparation.designations.store');
+    Route::get('/designation/{jobDesignation}/edit', [JobDesignationController::class, 'edit']);
+    Route::post('/designation/{jobDesignation}/update', [JobDesignationController::class, 'update']);
+    Route::post('/designation/delete', [JobDesignationController::class, 'destroy']);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //ROUTES FOR DEPARTMENTS
     Route::get('/departments', [DepartmentController::class, 'index'])->name('preparation.departments.index');
     Route::get('/department/create', [DepartmentController::class, 'create'])->name('preparation.departments.create');
@@ -55,16 +65,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/department/delete', [DepartmentController::class, 'destroy']);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //ROUTES FOR JOB DESIGNATIONS
-    Route::get('/designations', [JobDesignationController::class, 'index'])->name('preparation.designations.index');
-    Route::get('/designation/create', [JobDesignationController::class, 'create'])->name('preparation.designations.create');
-    Route::post('/designation/store', [JobDesignationController::class, 'store'])->name('preparation.designations.store');
-    Route::get('/designation/{jobDesignation}/edit', [JobDesignationController::class, 'edit']);
-    Route::post('/designation/{jobDesignation}/update', [JobDesignationController::class, 'update']);
-    Route::post('/designation/delete', [JobDesignationController::class, 'destroy']);
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //example route for img upload
+    Route::post('/upload-image', [DepartmentController::class, 'uploadImage'])->name('upload-image');
 });
+
+
 
 // useless routes
 // Just to demo sidebar dropdown links active states.
