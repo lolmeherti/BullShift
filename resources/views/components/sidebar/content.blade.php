@@ -28,14 +28,14 @@
             :active="request()->routeIs('preparation.contracts.index')"
         />
         <x-sidebar.sublink
-            title="Departments"
-            href="{{ route('preparation.departments.index') }}"
-            :active="request()->routeIs('preparation.departments.index')"
-        />
-        <x-sidebar.sublink
             title="Designations"
             href="{{ route('preparation.designations.index') }}"
             :active="request()->routeIs('preparation.designations.index')"
+        />
+        <x-sidebar.sublink
+            title="Departments"
+            href="{{ route('preparation.departments.index') }}"
+            :active="request()->routeIs('preparation.departments.index')"
         />
         <x-sidebar.sublink
             title="Invitations"
