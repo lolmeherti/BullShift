@@ -61,7 +61,7 @@
                     </div>
 
                     <a href="#" id="consent_to_deletion_button" data-modal-hide="popup-modal" type="button"
-                       onclick="deleteRequest('/designation/delete')"
+                       onclick="deleteRequest('/department/delete')"
                        class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-purple-500 dark:bg-red-500 text-purple-50 inline-block">
                             <span
                                 class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-400 dark:bg-red-400 group-hover:h-full opacity-90"></span>
@@ -128,11 +128,11 @@
                 <tr class="bg-gray-50 border-b dark:bg-dark-eval-1 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:bg-opacity-70 hover:bg-gray-100  hover:bg-opacity-50"
                     id="table_row_id{{$department->id}}">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-white">
-                        {{$department->designation}}
+                        {{$department->department}}
                     </th>
 
                     <td class="px-6 py-4">
-                        {{$department->contract_type}}
+                        {{$department->manager_name}}
                     </td>
 
                     <td class="px-6 py-4">
@@ -141,14 +141,14 @@
 
                     <td class="px-6 py-4 text-right">
                         <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
-                            <a href="{{url('/designation/'.$department->id.'/edit')}}"
+                            <a href="{{url('/department/'.$department->id.'/edit')}}"
                                class="px-5 py-1.5 relative rounded group overflow-hidden font-medium text-purple-50 bg-neutral-600 dark:bg-gray-700 inline-block">
                                 <span
                                     class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-neutral-500 dark:bg-gray-600 group-hover:h-full opacity-90"></span>
                                 <span class="relative group-hover:text-white">Edit</span>
                             </a>
                             <a href="#" id="delete"
-                               onclick="deleteConfirmation({{$department->id}}, '{{$department->designation}}')"
+                               onclick="deleteConfirmation({{$department->id}}, '{{$department->department}}')"
                                class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-purple-500 dark:bg-red-500 text-purple-50 inline-block">
                                 <span
                                     class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-400 dark:bg-red-400 group-hover:h-full opacity-90"></span>
