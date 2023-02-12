@@ -99,9 +99,9 @@
                     </div>
                     <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
                         <a href="{{route('preparation.contracts.create')}}"
-                           class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-green-700 text-purple-50 inline-block">
+                           class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-green-600 text-purple-50 inline-block">
                             <span
-                                class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-green-600 group-hover:h-full opacity-90"></span>
+                                class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-green-500 group-hover:h-full opacity-90"></span>
                             <span class="relative group-hover:text-white">New</span>
                         </a>
                     </div>
