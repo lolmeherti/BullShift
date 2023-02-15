@@ -11,12 +11,12 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('department')->unique();
-            $table->string('manager_name');
+            $table->string('manager_name')->nullable();
             $table->tinyInteger('manager_user_fid')->nullable();
             $table->timestamps();
         });
