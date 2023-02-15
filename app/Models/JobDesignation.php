@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int|mixed|string|null $user_fid
+ * @property mixed $designation
+ * @property mixed $contract_type_fid
+ */
 class JobDesignation extends Model
 {
     use HasFactory;
