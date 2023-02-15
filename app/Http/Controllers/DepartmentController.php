@@ -53,9 +53,9 @@ class DepartmentController extends Controller
         ]);
 
         $department = new Department();
-        $department->department = $request->department;
-        $department->manager_name = $request->manager_name;
-        $department->manager_user_fid = (int) $request->manager_user_fid ?? null;
+        $department->department = (string) $request->input('department');
+        $department->manager_name = (string) $request->input('manager_name');
+        $department->manager_user_fid = (int) $request->input('manager_user_fid');
 
         $department->save();
 
@@ -65,7 +65,7 @@ class DepartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param Department $department
      * @return Response
      */
     public function show(Department $department)
@@ -76,7 +76,7 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Department  $department
+     * @param Department $department
      * @return Application|Factory|View
      */
     public function edit(Department $department): View|Factory|Application
@@ -85,14 +85,13 @@ class DepartmentController extends Controller
         $users = User::all();
 
         return view('preparation.departments.edit', compact('users', 'department'));
-
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  \App\Models\Department  $department
+     * @param Department $department
      * @return Response
      */
     public function update(Request $request, Department $department)
@@ -102,9 +101,9 @@ class DepartmentController extends Controller
             'department' => 'required|max:255',
         ]);
 
-        $department->department = $request->department;
-        $department->manager_name = $request->manager_name;
-        $department->manager_user_fid = (int) $request->manager_user_fid ?? null;
+        $department->department = (string) $request->input('department');
+        $department->manager_name = (string) $request->input('manager_name');
+        $department->manager_user_fid = (int) $request->input('manager_user_fid');
 
         $department->save();
 

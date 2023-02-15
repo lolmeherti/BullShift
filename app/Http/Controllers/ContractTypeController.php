@@ -57,12 +57,12 @@ class ContractTypeController extends Controller
 
         $contract = new ContractType();
         $contract->user_fid = Auth::id();
-        $contract->contract_type = $request->contract_type;
-        $contract->min_hours_per_shift = $request->min_shift_length + 0;
-        $contract->max_hours_per_week = $request->hours_per_week + 0;
-        $contract->break_length_in_minutes = $request->break_length;
-        $contract->break_included = $request->break_included ?? "off";
-        $contract->days_of_vacation_per_year = $request->days_of_vacation_per_year;
+        $contract->contract_type = (string) $request->input('contract_type');
+        $contract->min_hours_per_shift = (int) $request->input('min_shift_length');
+        $contract->max_hours_per_week = (int) $request->input('hours_per_week');
+        $contract->break_length_in_minutes = (int) $request->input('break_length');
+        $contract->break_included = (string) $request->input('break_included') ?? "off";
+        $contract->days_of_vacation_per_year = (int) $request->input('days_of_vacation_per_year');
         $contract->save();
 
         return redirect()->back()->withSuccess('Contract Type has been created successfully!');
@@ -110,12 +110,12 @@ class ContractTypeController extends Controller
         ]);
 
         $contract->user_fid = Auth::id();
-        $contract->contract_type = $request->contract_type;
-        $contract->min_hours_per_shift = $request->min_shift_length;
-        $contract->max_hours_per_week = $request->hours_per_week;
-        $contract->break_length_in_minutes = $request->break_length;
-        $contract->break_included = $request->break_included ?? "off";
-        $contract->days_of_vacation_per_year = $request->days_of_vacation_per_year;
+        $contract->contract_type = (string) $request->input('contract_type');
+        $contract->min_hours_per_shift = (int) $request->input('min_shift_length');
+        $contract->max_hours_per_week = (int) $request->input('hours_per_week');
+        $contract->break_length_in_minutes = (int) $request->input('break_length');
+        $contract->break_included = (string) $request->input('break_included') ?? "off";
+        $contract->days_of_vacation_per_year = (int) $request->input('days_of_vacation_per_year');
         $contract->update();
 
         return redirect()->back()->withSuccess('Contract Type has been changed successfully!');

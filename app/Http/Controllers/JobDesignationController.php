@@ -55,9 +55,9 @@ class JobDesignationController extends Controller
         ]);
 
         $designation = new JobDesignation();
-        $designation->user_fid = Auth::id();
-        $designation->designation = $request->designation;
-        $designation->contract_type_fid = $request->contract_type_fid;
+        $designation->user_fid = (int) Auth::id();
+        $designation->designation = (string) $request->input('designation');
+        $designation->contract_type_fid = (int) $request->input('contract_type_fid');
 
         $designation->save();
 
@@ -103,9 +103,9 @@ class JobDesignationController extends Controller
             'contract_type_fid' => 'required',
         ]);
 
-        $jobDesignation->user_fid = Auth::id();
-        $jobDesignation->designation = $request->designation;
-        $jobDesignation->contract_type_fid = $request->contract_type_fid;
+        $jobDesignation->user_fid = (int) Auth::id();
+        $jobDesignation->designation = (string) $request->input('designation');
+        $jobDesignation->contract_type_fid = (int) $request->input('contract_type_fid');
         $jobDesignation->save();
 
         return redirect()->back()->withSuccess('Designation has been edited successfully!');
