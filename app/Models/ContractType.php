@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $user_fid
  * @property string $contract_type
- * @property int $min_hours_per_shift
- * @property mixed $max_hours_per_week
+ * @property float $min_hours_per_shift
+ * @property float $max_hours_per_week
  * @property int $break_length_in_minutes
  * @property string $break_included
  * @property int $days_of_vacation_per_year
