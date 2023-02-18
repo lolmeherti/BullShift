@@ -16,7 +16,7 @@
                 <p class="text-xl font-semibold">
                     Create a Contract Type
 
-                <ul id="creation_text" class="pt-2 hidden">
+                <ul id="loading_spinner_animated" class="pt-2 hidden">
                     <li class="flex items-center">
                         <svg aria-hidden="true" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
@@ -65,11 +65,11 @@
             <div class="mb-6">
                 <label for="min_shift_length" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Min. Shift Length <span class="text-gray-600 dark:text-gray-400" style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
                 @if ($errors->has('min_shift_length'))
-                    <input type="number" value="{{old('min_shift_length')}}" min="1" max="48" id="min_shift_length"  name="min_shift_length" class="{{$alertFormInputTheme}} text-sm rounded-lg block w-full p-2.5"
+                    <input type="number" value="{{old('min_shift_length')}}" min="1" max="48" step="0.01" id="min_shift_length"  name="min_shift_length" class="{{$alertFormInputTheme}} text-sm rounded-lg block w-full p-2.5"
                            placeholder="8" required>
                     <span class="text-red-500">{{ $errors->first('min_shift_length') }}</span>
                 @else
-                    <input type="number" value="{{old('min_shift_length')}}" min="1" max="48" id="min_shift_length" name="min_shift_length" class="{{$normalFormInputTheme}} text-sm rounded-lg block w-full p-2.5"
+                    <input type="number" value="{{old('min_shift_length')}}" min="1" max="48" step="0.01" id="min_shift_length" name="min_shift_length" class="{{$normalFormInputTheme}} text-sm rounded-lg block w-full p-2.5"
                            placeholder="8" required>
                 @endif
             </div>
@@ -106,9 +106,9 @@
 
         <td class="px-6 py-4 text-right">
             <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end py-4">
-                <button type="submit" onclick="showCreatingInProgress()"
+                <button type="submit" id="create_button" onclick="showCreatingInProgress()"
                         class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-green-600 text-purple-50 inline-block">
-                        <span
+                        <span id="create_button_highlighted"
                             class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-green-500 group-hover:h-full opacity-90"></span>
                     <span class="relative group-hover:text-white">Submit</span>
                 </button>
