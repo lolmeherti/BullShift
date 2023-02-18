@@ -52,12 +52,17 @@ class JobDesignationController extends Controller
         $request->validate([
             'designation' => 'required|max:255',
             'contract_type_fid' => 'required',
+        ],
+            [
+            'contract_type_fid.required' => 'A contract type is required!',
         ]);
 
         $designation = new JobDesignation();
         $designation->user_fid = (int) Auth::id();
         $designation->designation = (string) $request->input('designation');
         $designation->contract_type_fid = (int) $request->input('contract_type_fid');
+
+
 
         $designation->save();
 
