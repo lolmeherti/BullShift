@@ -28,6 +28,10 @@ let deleteRequest = (postUrl) => {
             //the controller will check for dependencies before deleting
             if(response.data.dependency)
             {
+                //note for state of code
+                //if this code is extracted in refactor, the data.dependency message still needs to be passed as a parameter.
+                //extraction doesn't make too much of a difference at this point in time
+
                 //we enter in here if dependencies are found
                 document.getElementById('deletion_warning_message').innerHTML = response.data.dependency;
 
