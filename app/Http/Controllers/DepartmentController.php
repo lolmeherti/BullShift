@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -125,6 +127,12 @@ class DepartmentController extends Controller
         }
     }
 
+    /**
+     * Uploads an image to public/images
+     *
+     * @param Request $request
+     * @return
+     */
     public function uploadImage(Request $request)
     {
         if ($request->hasFile('image')) {
@@ -140,8 +148,35 @@ class DepartmentController extends Controller
         return back()->with('error', 'Please select an image to upload.');
     }
 
+    /**
+     * Returns a collection with all departments made
+     *
+     * @returns Collection
+     */
     public function getAllDepartments(): \Illuminate\Support\Collection
     {
         return DB::table('departments')->get();
+    }
+
+    /**
+     * Returns searched manager.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchManager(Request $request): JsonResponse
+    {
+        $managerName = $request->input('query');
+
+        if($managerName) {
+            $managers = DB::table('users')->select('name','email','id')
+                ->where('name','like','%'.$managerName.'%')->get();
+        } else {
+            $managers = DB::table('users')->select('name','email','id')->get();
+        }
+
+        return response()->json([
+            'managers' => $managers
+        ]);
     }
 }
