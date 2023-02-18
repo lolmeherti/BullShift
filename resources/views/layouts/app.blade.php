@@ -28,6 +28,7 @@
     <!-- delete modal functionality -->
     <script type="text/javascript" src="{{ asset('js/delete_modal_functionality.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/loadingInsert.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/searchFunctionality.js') }}"></script>
 </head>
 
 
