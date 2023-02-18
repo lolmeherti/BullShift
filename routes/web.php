@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/department/{department}/edit', [DepartmentController::class, 'edit']);
     Route::post('/department/{department}/update', [DepartmentController::class, 'update']);
     Route::post('/department/delete', [DepartmentController::class, 'destroy']);
+    Route::post('/department/search/manager', [DepartmentController::class, 'searchManager'])->name('department.search.manager');
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
