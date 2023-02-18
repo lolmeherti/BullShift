@@ -50,7 +50,7 @@ class ContractTypeController extends Controller
         $request->validate([
             'contract_type' => 'required|unique:contract_types|max:255',
             'hours_per_week' => 'decimal:0,1|max:120|required',
-            'min_shift_length' => 'integer|required|min:1|max:48',
+            'min_shift_length' => 'decimal:0,1|required|min:1|max:48',
             'days_of_vacation_per_year' => 'integer|required',
             'break_length' => 'integer|required'
         ]);
@@ -58,8 +58,8 @@ class ContractTypeController extends Controller
         $contract = new ContractType();
         $contract->user_fid = Auth::id();
         $contract->contract_type = (string) $request->input('contract_type');
-        $contract->min_hours_per_shift = (int) $request->input('min_shift_length');
-        $contract->max_hours_per_week = (int) $request->input('hours_per_week');
+        $contract->min_hours_per_shift = (float) $request->input('min_shift_length');
+        $contract->max_hours_per_week = (float) $request->input('hours_per_week');
         $contract->break_length_in_minutes = (int) $request->input('break_length');
         $contract->break_included = (string) $request->input('break_included') ?? "off";
         $contract->days_of_vacation_per_year = (int) $request->input('days_of_vacation_per_year');
@@ -104,15 +104,15 @@ class ContractTypeController extends Controller
         $request->validate([
             'contract_type' => 'required|max:255',
             'hours_per_week' => 'decimal:0,1|max:120|required',
-            'min_shift_length' => 'integer|required|min:1|max:48',
+            'min_shift_length' => 'decimal:0,1|required|min:1|max:48',
             'days_of_vacation_per_year' => 'integer|required',
             'break_length' => 'integer|required'
         ]);
 
         $contract->user_fid = Auth::id();
         $contract->contract_type = (string) $request->input('contract_type');
-        $contract->min_hours_per_shift = (int) $request->input('min_shift_length');
-        $contract->max_hours_per_week = (int) $request->input('hours_per_week');
+        $contract->min_hours_per_shift = (float)($request->input('min_shift_length'));
+        $contract->max_hours_per_week = (float) $request->input('hours_per_week');
         $contract->break_length_in_minutes = (int) $request->input('break_length');
         $contract->break_included = (string) $request->input('break_included') ?? "off";
         $contract->days_of_vacation_per_year = (int) $request->input('days_of_vacation_per_year');
