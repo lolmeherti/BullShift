@@ -6,9 +6,9 @@ use App\Models\ContractType;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +20,7 @@ class ContractTypeController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         //fetching contract types
         $contracts = $this->getAllContractTypes();
@@ -33,7 +33,7 @@ class ContractTypeController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         //
         return view('preparation.contracts.create');
@@ -42,10 +42,10 @@ class ContractTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'contract_type' => 'required|unique:contract_types|max:255',
@@ -72,9 +72,9 @@ class ContractTypeController extends Controller
      * Display the specified resource.
      *
      * @param ContractType $contractType
-     * @return Response
+     * @return void
      */
-    public function show(ContractType $contractType)
+    public function show(ContractType $contractType): void
     {
         //
 
@@ -95,11 +95,11 @@ class ContractTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param ContractType $contract
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, ContractType $contract)
+    public function update(Request $request, ContractType $contract): RedirectResponse
     {
         $request->validate([
             'contract_type' => 'required|max:255',
@@ -125,15 +125,15 @@ class ContractTypeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @return RedirectResponse|void
+     * @return JsonResponse | RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse | RedirectResponse
     {
-        $contract = ContractType::find($request->id);
+        $contract = ContractType::find($request->input('id'));
 
         $contractDesignationsCount = $contract->jobDesignations->count();
 
-        if ($contractDesignationsCount > 0 && !$request->deleteAnyway) {
+        if ($contractDesignationsCount > 0 && !$request->input('deleteAnyway')) {
             return response()->json(['dependency' => 'This contract is associated with job designations. Please remove all association before deleting the contract.']);
         } else {
             $contract->delete();

@@ -6,11 +6,13 @@ use App\Models\JobDesignation;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class JobDesignationController extends Controller
 {
@@ -45,9 +47,9 @@ class JobDesignationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'designation' => 'required|max:255',
@@ -73,9 +75,9 @@ class JobDesignationController extends Controller
      * Display the specified resource.
      *
      * @param JobDesignation $jobDesignation
-     * @return Response
+     * @return void
      */
-    public function show(JobDesignation $jobDesignation)
+    public function show(JobDesignation $jobDesignation): void
     {
         //
     }
@@ -98,11 +100,11 @@ class JobDesignationController extends Controller
      *
      * @param Request $request
      * @param JobDesignation $jobDesignation
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, JobDesignation $jobDesignation)
+    public function update(Request $request, JobDesignation $jobDesignation): RedirectResponse
     {
-        //
+
         $request->validate([
             'designation' => 'required|max:255',
             'contract_type_fid' => 'required',
@@ -120,14 +122,14 @@ class JobDesignationController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @return Response
+     * @return void
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request) : void
     {
         //
-        if($request->id)
+        if($request->input('id'))
         {
-            JobDesignation::destroy($request->id);
+            JobDesignation::destroy($request->input('id'));
         }
     }
 

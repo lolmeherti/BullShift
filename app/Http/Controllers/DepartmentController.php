@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -43,9 +44,9 @@ class DepartmentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'department' => 'required|max:255',
@@ -64,9 +65,9 @@ class DepartmentController extends Controller
      * Display the specified resource.
      *
      * @param Department $department
-     * @return Response
+     * @return void
      */
-    public function show(Department $department)
+    public function show(Department $department): void
     {
         //
     }
@@ -89,9 +90,9 @@ class DepartmentController extends Controller
      *
      * @param Request $request
      * @param Department $department
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request, Department $department): RedirectResponse
     {
         //
         $request->validate([
@@ -112,12 +113,12 @@ class DepartmentController extends Controller
      * @param Request $request
      * @return void
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): void
     {
         //
-        if($request->id)
+        if($request->input('id'))
         {
-            Department::destroy($request->id);
+            Department::destroy($request->input('id'));
         }
     }
 
@@ -125,9 +126,9 @@ class DepartmentController extends Controller
      * Uploads an image to public/images
      *
      * @param Request $request
-     * @return
+     * @return RedirectResponse
      */
-    public function uploadImage(Request $request)
+    public function uploadImage(Request $request): RedirectResponse
     {
         if ($request->hasFile('image')) {
             $image = $request->file('image');
