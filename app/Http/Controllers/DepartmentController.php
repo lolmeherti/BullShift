@@ -24,7 +24,7 @@ class DepartmentController extends Controller
     public function index(): Application|Factory|View
     {
         //
-        $departments = $this->getAllDepartments();
+        $departments = $this->getAllDepartmentsWithManager();
         return view('preparation.departments.index', compact('departments'));
     }
 
@@ -36,10 +36,7 @@ class DepartmentController extends Controller
     public function create(): View|Factory|Application
     {
         //
-
-        $users = User::all();
-
-        return view('preparation.departments.create', compact('users'));
+        return view('preparation.departments.create');
     }
 
     /**
@@ -56,7 +53,6 @@ class DepartmentController extends Controller
 
         $department = new Department();
         $department->department = (string) $request->input('department');
-        $department->manager_name = (string) $request->input('manager_name');
         $department->manager_user_fid = (int) $request->input('manager_user_fid');
 
         $department->save();
@@ -83,10 +79,9 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department): View|Factory|Application
     {
-        //
-        $users = User::all();
+        $managerName = User::where('id', $department->manager_user_fid)->value('name');
 
-        return view('preparation.departments.edit', compact('users', 'department'));
+        return view('preparation.departments.edit', compact('managerName', 'department'));
     }
 
     /**
@@ -104,7 +99,6 @@ class DepartmentController extends Controller
         ]);
 
         $department->department = (string) $request->input('department');
-        $department->manager_name = (string) $request->input('manager_name');
         $department->manager_user_fid = (int) $request->input('manager_user_fid');
 
         $department->save();
@@ -149,13 +143,18 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Returns a collection with all departments made
+     * Returns a collection with all departments and their respective manager
      *
      * @returns Collection
      */
-    public function getAllDepartments(): \Illuminate\Support\Collection
+    public function getAllDepartmentsWithManager(): \Illuminate\Support\Collection
     {
-        return DB::table('departments')->get();
+        $departmentsWithManager = DB::table('departments')
+            ->leftJoin('users', 'departments.manager_user_fid', '=', 'users.id')
+            ->select('departments.*', 'users.name as manager_name')
+            ->get();
+
+        return $departmentsWithManager;
     }
 
     /**

@@ -37,7 +37,6 @@
             </div>
 
             <input type="hidden" id="manager_user_fid" name="manager_user_fid" value="{{$department->manager_user_fid}}">
-            <input type="hidden" name="manager_name" id="manager_name" value="{{$department->manager_name}}">
 
             <div class="mb-6">
                 <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department
@@ -58,7 +57,7 @@
             <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Manager
                 <span class="text-gray-600 dark:text-gray-400"
                       style="font-style: italic; font-size:0.8em">{{ "(optional)" }}</span></label>
-            <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" data-dropdown-placement="right-end" data-dropdown-offset-skidding="215" class="text-white bg-purple-500 hover:bg-purple-400  focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-purple-500 dark:hover:bg-purple-500" type="button"><span id="manager_name_display">@if($department->manager_name) {{$department->manager_name}} @else Manager @endif</span> <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+            <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" data-dropdown-placement="right-end" data-dropdown-offset-skidding="215" class="text-white bg-purple-500 hover:bg-purple-400  focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-purple-500 dark:hover:bg-purple-500" type="button"><span id="manager_name_display">@if($managerName) {{$managerName}} @else Manager @endif</span> <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
 
             <!-- Dropdown menu -->
             <div id="dropdownSearch" class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700 border border-gray-400">
@@ -100,7 +99,6 @@
     let setManagerName = (name, id) =>
     {
         document.getElementById('manager_user_fid').value = id;
-        document.getElementById('manager_name').value = name;
         document.getElementById('manager_name_display').innerHTML = name;
     }
 

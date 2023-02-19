@@ -37,7 +37,6 @@
             </div>
 
             <input type="hidden" id="manager_user_fid" name="manager_user_fid" value="">
-            <input type="hidden" name="manager_name" id="manager_name" value="">
 
             <div class="mb-6">
                 <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department
@@ -101,7 +100,6 @@
     let setManagerName = (name, id) =>
     {
         document.getElementById('manager_user_fid').value = id;
-        document.getElementById('manager_name').value = name;
         document.getElementById('manager_name_display').innerHTML = name;
     }
 

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('department')->unique();
-            $table->string('manager_name')->nullable();
             $table->tinyInteger('manager_user_fid')->nullable();
             $table->timestamps();
         });
