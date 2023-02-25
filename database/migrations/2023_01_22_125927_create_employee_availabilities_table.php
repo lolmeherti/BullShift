@@ -18,12 +18,12 @@ return new class extends Migration
             $table->integer('user_fid')->unique();
             $table->integer('contract_type_fid');
             $table->string('availability_status');
-            $table->integer('hours_worked_per_day');
-            $table->integer('max_hours_per_day');
-            $table->integer('hours_worked_per_week');
-            $table->integer('max_hours_per_week');
-            $table->integer('hours_worked_this_month');
-            $table->integer('max_hours_this_month');
+            $table->decimal('hours_worked_per_day');
+            $table->decimal('max_hours_per_day');
+            $table->decimal('hours_worked_per_week');
+            $table->decimal('max_hours_per_week');
+            $table->decimal('hours_worked_this_month');
+            $table->decimal('max_hours_this_month');
             $table->integer('days_of_vacation_left');
             $table->integer('max_days_of_vacation');
             $table->timestamps();
