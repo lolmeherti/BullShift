@@ -8,11 +8,9 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 
 class JobDesignationController extends Controller
 {
@@ -56,15 +54,13 @@ class JobDesignationController extends Controller
             'contract_type_fid' => 'required',
         ],
             [
-            'contract_type_fid.required' => 'A contract type is required!',
-        ]);
+                'contract_type_fid.required' => 'A contract type is required!',
+            ]);
 
         $designation = new JobDesignation();
-        $designation->user_fid = (int) Auth::id();
-        $designation->designation = (string) $request->input('designation');
-        $designation->contract_type_fid = (int) $request->input('contract_type_fid');
-
-
+        $designation->user_fid = (int)Auth::id();
+        $designation->designation = (string)$request->input('designation');
+        $designation->contract_type_fid = (int)$request->input('contract_type_fid');
 
         $designation->save();
 
@@ -110,9 +106,9 @@ class JobDesignationController extends Controller
             'contract_type_fid' => 'required',
         ]);
 
-        $jobDesignation->user_fid = (int) Auth::id();
-        $jobDesignation->designation = (string) $request->input('designation');
-        $jobDesignation->contract_type_fid = (int) $request->input('contract_type_fid');
+        $jobDesignation->user_fid = (int)Auth::id();
+        $jobDesignation->designation = (string)$request->input('designation');
+        $jobDesignation->contract_type_fid = (int)$request->input('contract_type_fid');
         $jobDesignation->save();
 
         return redirect()->back()->withSuccess('Designation has been edited successfully!');
@@ -124,11 +120,10 @@ class JobDesignationController extends Controller
      * @param Request $request
      * @return void
      */
-    public function destroy(Request $request) : void
+    public function destroy(Request $request): void
     {
         //
-        if($request->input('id'))
-        {
+        if ($request->input('id')) {
             JobDesignation::destroy($request->input('id'));
         }
     }
@@ -138,11 +133,24 @@ class JobDesignationController extends Controller
      *
      * @return Collection
      */
-    public function getAllJobDesignationsWithContract(): Collection
+    public static function getAllJobDesignationsWithContract(): Collection
     {
         return DB::table('job_designations')
             ->leftJoin('contract_types', 'job_designations.contract_type_fid', '=', 'contract_types.id')
             ->select('job_designations.*', 'contract_types.contract_type')
+            ->orderBy('designation')
             ->get();
+    }
+
+    /**
+     * Fetches $contract_type_fid of Designation by Job DesignationId
+     * @param int $designationId
+     * @return int with $contract_type_fid
+     */
+    public static function getContractFidByJobDesignationId(int $designationId): int
+    {
+        return DB::table('job_designations')
+            ->where('id', '=', $designationId)
+            ->value('contract_type_fid');
     }
 }
