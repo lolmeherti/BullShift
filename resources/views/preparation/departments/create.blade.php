@@ -54,7 +54,7 @@
                 @endif
             </div>
 
-            <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Manager
+            <label for="manager" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Manager
                 <span class="text-gray-600 dark:text-gray-400"
                       style="font-style: italic; font-size:0.8em">{{ "(optional)" }}</span></label>
             <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" data-dropdown-placement="right-end" data-dropdown-offset-skidding="215" class="text-white bg-purple-500 hover:bg-purple-400  focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-purple-500 dark:hover:bg-purple-500" type="button"><span id="manager_name_display">Manager</span> <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
@@ -75,7 +75,7 @@
                 </ul>
                 <a href="#" class="flex items-center p-3 text-sm font-medium text-purple-500 border-t border-gray-200 rounded-b-lg bg-gray-50 dark:border-gray-600 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white hover:underline">
                     <svg class="w-5 h-5 mr-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path></svg>
-                    Invite Manager
+                    Invite Employee
                 </a>
             </div>
 
