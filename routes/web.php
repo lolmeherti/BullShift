@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContractTypeController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\JobDesignationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -66,14 +67,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/department/search/manager', [DepartmentController::class, 'searchManager'])->name('department.search.manager');
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    //example route for img upload
-    Route::post('/upload-image', [DepartmentController::class, 'uploadImage'])->name('upload-image');
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //ROUTES FOR EMPLOYEES AND THEIR INVITATIONS
+    Route::get('/invitations', [EmployeeController::class, 'invitationsIndex'])->name('preparation.invitations.index');
+    Route::get('/invitation/create', [EmployeeController::class, 'create'])->name('preparation.invitations.create');
+    Route::post('/employee/store', [EmployeeController::class, 'store'])->name('preparation.employee.store');
+    Route::get('/invitation/{employee}/edit', [EmployeeController::class, 'edit']);
+    Route::post('/invitation/{employee}/update', [EmployeeController::class, 'update']);
+    Route::post('/invitation/delete', [EmployeeController::class, 'destroy']);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 });
 
 
 
 // useless routes
+//    //example route for img upload
+//    Route::post('/upload-image', [DepartmentController::class, 'uploadImage'])->name('upload-image');
 // Just to demo sidebar dropdown links active states.
 Route::get('/buttons/text', function () {
     return view('buttons-showcase.text');
