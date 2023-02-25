@@ -35,7 +35,7 @@
 
             </div>
             <div class="mb-6">
-                <label for="contract_type" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Designation
+                <label for="designation" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Designation
                     <span class="text-gray-600 dark:text-gray-400"
                           style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
 
