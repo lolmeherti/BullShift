@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
@@ -148,14 +147,13 @@ class DepartmentController extends Controller
      *
      * @returns Collection
      */
-    public function getAllDepartmentsWithManager(): \Illuminate\Support\Collection
+    public static function getAllDepartmentsWithManager(): \Illuminate\Support\Collection
     {
-        $departmentsWithManager = DB::table('departments')
+        return DB::table('departments')
             ->leftJoin('users', 'departments.manager_user_fid', '=', 'users.id')
             ->select('departments.*', 'users.name as manager_name')
+            ->orderBy('department')
             ->get();
-
-        return $departmentsWithManager;
     }
 
     /**

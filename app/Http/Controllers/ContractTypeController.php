@@ -148,6 +148,8 @@ class ContractTypeController extends Controller
      */
     public static function getAllContractTypes(): Collection
     {
-       return DB::table("contract_types")->get();
+       return DB::table("contract_types")
+           ->orderBy('contract_type')
+           ->get();
     }
 }
