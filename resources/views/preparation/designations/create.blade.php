@@ -37,7 +37,7 @@
             </div>
 
             <div class="mb-6">
-                <label for="contract_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Designation
+                <label for="designation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Designation
                     <span class="text-gray-600 dark:text-gray-400"
                           style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
                 @if ($errors->has('designation'))
