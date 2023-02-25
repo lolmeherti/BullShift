@@ -28,7 +28,8 @@
         }
     </style>
 
-    <dialog id="myModal" class="h-1/4 w-1/4  bg-gray-100 dark:bg-dark-eval-1 rounded-md border border-neutral-700 dark:border-neutral-700">
+    <dialog id="myModal"
+            class="h-1/4 w-1/4  bg-gray-100 dark:bg-dark-eval-1 rounded-md border border-neutral-700 dark:border-neutral-700">
         <div class="flex flex-col w-full h-auto ">
             <!-- Header -->
             <div class="flex w-full h-auto justify-center items-center">
@@ -37,11 +38,11 @@
                     id="deletion_warning">
                     Modal Header
                 </div>
-
                 <!--Header End-->
             </div>
             <!-- Modal Content-->
-            <div class="justify-center items-center rounded text-center dark:text-gray-400 text-gray-400" id="deletion_warning_message">
+            <div class="justify-center items-center rounded text-center dark:text-gray-400 text-gray-400"
+                 id="deletion_warning_message">
                 This action is permanent. Are you sure you want to proceed?
             </div>
             <div class="flex w-full h-auto py-10 px-2 justify-center items-center rounded text-center text-gray-500">
@@ -108,13 +109,17 @@
                 </div>
 
             </caption>
-            <thead class="text-sm text-gray-100 uppercase bg-neutral-600 dark:bg-gray-700 text-gray-100 dark:text-gray-200">
+            <thead
+                class="text-sm text-gray-100 uppercase bg-neutral-600 dark:bg-gray-700 text-gray-100 dark:text-gray-200">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Contract
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Hours/Week
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Shift Length
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Employee Count
@@ -124,9 +129,8 @@
             </tr>
             </thead>
             <tbody>
-
             @foreach($contracts as $contract)
-                <tr class="bg-gray-50 border-b dark:bg-dark-eval-1 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:bg-opacity-70 hover:bg-gray-100  hover:bg-opacity-50"
+                <tr class="bg-gray-50 border-b dark:bg-dark-eval-1 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:bg-opacity-70 hover:bg-gray-100 hover:bg-opacity-50"
                     id="table_row_id{{$contract->id}}">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-white">
                         {{$contract->contract_type}}
@@ -134,6 +138,10 @@
 
                     <td class="px-6 py-4">
                         {{$contract->max_hours_per_week + 0}}
+                    </td>
+
+                    <td class="px-6 py-4">
+                        {{$contract->min_hours_per_shift + 0}} Hours
                     </td>
 
                     <td class="px-6 py-4">
