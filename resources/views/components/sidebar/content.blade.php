@@ -25,22 +25,22 @@
         <x-sidebar.sublink
             title="Contracts"
             href="{{ route('preparation.contracts.index') }}"
-            :active="request()->routeIs('preparation.contracts.index')"
+            :active="Str::startsWith(request()->route()->uri(), ['contract'])"
         />
         <x-sidebar.sublink
             title="Designations"
             href="{{ route('preparation.designations.index') }}"
-            :active="request()->routeIs('preparation.designations.index')"
+            :active="Str::startsWith(request()->route()->uri(), ['designation'])"
         />
         <x-sidebar.sublink
             title="Departments"
             href="{{ route('preparation.departments.index') }}"
-            :active="request()->routeIs('preparation.departments.index')"
+            :active="Str::startsWith(request()->route()->uri(), ['department'])"
         />
         <x-sidebar.sublink
             title="Invitations"
-            href="{{ route('buttons.text-icon') }}"
-            :active="request()->routeIs('buttons.text-icon')"
+            href="{{ route('preparation.invitations.index') }}"
+            :active="Str::startsWith(request()->route()->uri(), ['invitation'])"
         />
     </x-sidebar.dropdown>
 
