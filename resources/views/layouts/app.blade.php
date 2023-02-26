@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'K UI') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link
@@ -19,16 +19,12 @@
         }
     </style>
 
-    <!--FLOWBITE-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
-
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- delete modal functionality -->
     <script type="text/javascript" src="{{ asset('js/delete_modal_functionality.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/loadingInsert.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/searchFunctionality.js') }}"></script>
 </head>
 
 
@@ -74,9 +70,6 @@
         </div>
     </div>
 </div>
-
-<!--FLOWBITE-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
 </body>
 </html>
