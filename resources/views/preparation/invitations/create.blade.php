@@ -1,21 +1,17 @@
 <x-app-layout>
-
     <x-slot name="header" class="p-2">
 
     </x-slot>
-
     @php
         $normalFormInputTheme = 'border dark:bg-gray-700 dark:border-gray-600 border-gray-300 dark:text-white bg-gray-100 dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 focus:ring-purple-500 focus:border-purple-500 text-gray-900';
         $alertFormInputTheme = 'border bg-red-100 text-gray-700 border-red-300 dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 focus:ring-purple-500 focus:border-purple-500 text-gray-900';
     @endphp
-
     <div class="bg-gray-50 dark:bg-dark-eval-1 p-6 overflow-hidden rounded-md shadow-md ">
         <form autocomplete="off" method="POST" action="{{route('preparation.employee.store')}}">
             @csrf
             <caption class="text-gray-900 dark:text-white bg-gray-50 dark:bg-dark-eval-1 text-xl font-bold text-left">
                 <p class="text-xl font-semibold">
                     Invite your Employees
-
                 <ul id="loading_spinner_animated" class="pt-2 hidden">
                     <li class="flex items-center">
                         <svg aria-hidden="true" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,17 +21,14 @@
                         <span class="text-gray-500 bg:text-gray-500">Loading...</span>
                     </li>
                 </ul>
-
                 @if(session('success'))
                     <p class="text-green-400" id="creation_success_message">{{session('success')}}</p>
                     @endif
                     </p>
             </caption>
-
             <div class="py-3">
 
             </div>
-
             <div class="mb-6">
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name
                     <span class="text-gray-600 dark:text-gray-400"
@@ -51,23 +44,21 @@
                            placeholder="John Doe" required>
                 @endif
             </div>
-
             <div class="mb-6">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
                     <span class="text-gray-600 dark:text-gray-400"
                           style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
                 @if ($errors->has('email'))
-                    <input type="text" id="email" value="{{old('email')}}" maxlength="70" name="email"
+                    <input type="text" id="email" value="deampuleadd@yandex.com" maxlength="70" name="email"
                            class="{{$alertFormInputTheme}} text-sm rounded-lg block w-full p-2.5"
                            placeholder="Example@email.com" required>
                     <span class="text-red-500">{{ $errors->first('email') }}</span>
                 @else
-                    <input type="text" id="email" value="{{old('email')}}" maxlength="70" name="email"
+                    <input type="text" id="email" value="deampuleadd@yandex.com" maxlength="70" name="email"
                            class="{{$normalFormInputTheme}} text-sm rounded-lg block w-full p-2.5"
                            placeholder="Example@email.com" required>
                 @endif
             </div>
-
             <div class="mb-6">
                 <label for="designation_fid" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Designation<span class="text-gray-600 dark:text-gray-400"
                                style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
@@ -90,7 +81,6 @@
                     </select>
                 @endif
             </div>
-
             <div class="mb-6">
                 <label for="days_of_vacation_left" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remaining Vacation Days
                     <span class="text-gray-600 dark:text-gray-400"
@@ -106,7 +96,6 @@
                            placeholder="15" required>
                 @endif
             </div>
-
             <div>
                 <label for="toggle_departments" class="relative inline-flex items-center mb-4 cursor-pointer">
                     <input type="checkbox" name="toggle_departments" id="toggle_departments" class="sr-only peer" onClick="departmentsToggle()">
@@ -114,7 +103,6 @@
                     <span class="text-gray-900 dark:text-white ml-3 text-sm font-medium">Using Departments</span>
                 </label>
             </div>
-
             <div class="mb-6 hidden" id="departments_dropdown">
                 <label for="department_fid" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Department
                     <span class="text-gray-600 dark:text-gray-400"
@@ -138,7 +126,6 @@
                     </select>
                 @endif
             </div>
-
             <div>
                 <label for="toggle_payroll" class="relative inline-flex items-center mb-4 cursor-pointer">
                     <input type="checkbox" name="toggle_payroll" id="toggle_payroll" class="sr-only peer" onclick="payrollToggle()">
@@ -146,7 +133,6 @@
                     <span class="text-gray-900 dark:text-white ml-3 text-sm font-medium">Using Payroll</span>
                 </label>
             </div>
-
                 <div class="mb-6 hidden" id="wage_input">
                     <label for="wage_per_year" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Wage/Year <span class="text-gray-600 dark:text-gray-400" style="font-style: italic; font-size:0.8em">{{ "(optional)" }}</span></label>
                     @if ($errors->has('hours_per_week'))
@@ -158,7 +144,6 @@
                                placeholder="155 000">
                     @endif
                 </div>
-
             <td class="px-6 py-4 text-right">
                 <div style="justify-self: end;" id="button_container" class="col-start-2 col-end-3 justify-items-end py-4">
                     <button type="submit" id="create_button" onclick="showCreatingInProgress()"
@@ -172,43 +157,7 @@
         </form>
     </div>
 </x-app-layout>
-
 <script>
-
-    // Get the wage_input element
-    let wageInput = document.getElementById("wage_per_year");
-    let regex = /[^0-9\s]/;
-    // Add an event listener to the wage_input element
-    wageInput.addEventListener("keyup", function() {
-        document.getElementById("wage_per_year").value = document.getElementById("wage_per_year").value.replace(regex, "");
-    });
-
-    let showDepartments = false;
-
-    function departmentsToggle()
-    {
-        showDepartments = !showDepartments;
-
-        if(showDepartments)
-        {
-            document.getElementById('departments_dropdown').classList.remove('hidden')
-        } else {
-            document.getElementById('departments_dropdown').classList.add('hidden')
-        }
-    }
-
-    let showWageInput = false;
-
-    function payrollToggle()
-    {
-        showWageInput = !showWageInput;
-
-        if(showWageInput)
-        {
-            document.getElementById('wage_input').classList.remove('hidden')
-        } else {
-            document.getElementById('wage_input').classList.add('hidden')
-        }
-    }
+    let e=document.getElementById("wage_per_year"),t=/[^0-9\s]/;e.addEventListener("keyup",function(){e.value=e.value.replace(t,"")});let o=!1;function departmentsToggle(){o=!o,o?document.getElementById("departments_dropdown").classList.remove("hidden"):document.getElementById("departments_dropdown").classList.add("hidden")}let n=!1;function payrollToggle(){n=!n,n?document.getElementById("wage_input").classList.remove("hidden"):document.getElementById("wage_input").classList.add("hidden")}
 </script>
 

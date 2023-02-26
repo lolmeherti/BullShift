@@ -1,21 +1,18 @@
 <x-app-layout>
-
+    <script type="text/javascript" src="{{ asset('js/searchFunctionality.js') }}"></script>
     <x-slot name="header" class="p-2">
 
     </x-slot>
-
     @php
         $normalFormInputTheme = 'border dark:bg-gray-700 dark:border-gray-600 border-gray-300 dark:text-white bg-gray-100 dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 focus:ring-purple-500 focus:border-purple-500 text-gray-900';
         $alertFormInputTheme = 'border bg-red-100 text-gray-700 border-red-300 dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 focus:ring-purple-500 focus:border-purple-500 text-gray-900';
     @endphp
-
     <div class="bg-gray-50 dark:bg-dark-eval-1 p-6 overflow-hidden rounded-md shadow-md ">
         <form autocomplete="off" method="POST" action="{{route('preparation.departments.store')}}">
             @csrf
             <caption class="text-gray-900 dark:text-white bg-gray-50 dark:bg-dark-eval-1 text-xl font-bold text-left">
                 <p class="text-xl font-semibold">
                     Create a Department
-
                 <ul id="loading_spinner_animated" class="pt-2 hidden">
                     <li class="flex items-center">
                         <svg aria-hidden="true" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,19 +22,14 @@
                         <span class="text-gray-500 bg:text-gray-500">Loading...</span>
                     </li>
                 </ul>
-
                 @if(session('success'))
                     <p class="text-green-400" id="creation_success_message">{{session('success')}}</p>
                     @endif
                     </p>
             </caption>
-
             <div class="py-3">
-
             </div>
-
             <input type="hidden" id="manager_user_fid" name="manager_user_fid" value="">
-
             <div class="mb-6">
                 <label for="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department
                     <span class="text-gray-600 dark:text-gray-400"
@@ -53,12 +45,10 @@
                            placeholder="Sales" required>
                 @endif
             </div>
-
             <label for="manager" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Manager
                 <span class="text-gray-600 dark:text-gray-400"
                       style="font-style: italic; font-size:0.8em">{{ "(optional)" }}</span></label>
             <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" data-dropdown-placement="right-end" data-dropdown-offset-skidding="215" class="text-white bg-purple-500 hover:bg-purple-400  focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-purple-500 dark:hover:bg-purple-500" type="button"><span id="manager_name_display">Manager</span> <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-
             <!-- Dropdown menu -->
             <div id="dropdownSearch" class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700 border border-gray-400">
                 <div class="p-3">
@@ -73,16 +63,13 @@
                 <ul class="h-48 py-2 overflow-y-auto text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUsersButton" id="usersFound">
                     <li class="text-center text-gray-400">Start typing to begin searching.</li>
                 </ul>
-                <a href="#" class="flex items-center p-3 text-sm font-medium text-purple-500 border-t border-gray-200 rounded-b-lg bg-gray-50 dark:border-gray-600 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white hover:underline">
+                <a href="{{ route('preparation.invitations.create') }}" class="flex items-center p-3 text-sm font-medium text-purple-500 border-t border-gray-200 rounded-b-lg bg-gray-50 dark:border-gray-600 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white hover:underline">
                     <svg class="w-5 h-5 mr-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path></svg>
                     Invite Employee
                 </a>
             </div>
-
             <div class="h-8">
-
             </div>
-
             <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end py-4">
                 <button type="submit" id="create_button" onclick="showCreatingDepartmentInProgress()"
                         class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-green-600 text-purple-50 inline-block">
@@ -91,30 +78,14 @@
                     <span class="relative group-hover:text-white">Submit</span>
                 </button>
             </div>
-
         </form>
     </div>
+    <!--FLOWBITE-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 </x-app-layout>
 
 <script>
-    let setManagerName = (name, id) =>
-    {
-        document.getElementById('manager_user_fid').value = id;
-        document.getElementById('manager_name_display').innerHTML = name;
-    }
-
-    let delayTimer;
-    const list = document.getElementById("usersFound");
-    let searchUrl = '/department/search/manager';
-
-    document.getElementById("inputSearchManagerName").addEventListener("keyup", function(){
-        clearTimeout(delayTimer); // clear the previous timer
-        let searchQuery = document.getElementById("inputSearchManagerName").value;
-
-        delayTimer = setTimeout(function() {
-            searchForManagerByUserName(searchUrl, searchQuery);
-        }, 700); // wait for 100 milliseconds before sending the request
-    });
+    let setManagerName=(e,t)=>{document.getElementById("manager_user_fid").value=t,document.getElementById("manager_name_display").innerHTML=e},delayTimer;const list=document.getElementById("usersFound"),searchUrl="/department/search/manager";document.getElementById("inputSearchManagerName").addEventListener("keyup",function(){clearTimeout(delayTimer);let e=document.getElementById("inputSearchManagerName").value;delayTimer=setTimeout(function(){searchForManagerByUserName(searchUrl,e)},700)});
 </script>
 
 
