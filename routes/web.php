@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ContractTypeController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeAvailabilityController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\JobDesignationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
@@ -22,7 +24,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/index', function () {
+    if(!ProfileController::isValidatedUser(Auth::id()))
+    {
+        EmployeeAvailabilityController::validateEmployeeAvailabilityStatus(Auth::id());
+        ProfileController::validateUserProfile(Auth::id());
+    }
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
