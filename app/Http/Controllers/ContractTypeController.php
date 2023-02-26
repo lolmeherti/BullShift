@@ -152,4 +152,17 @@ class ContractTypeController extends Controller
            ->orderBy('contract_type')
            ->get();
     }
+
+
+    /**
+     * Fetches a contract type by its id.
+     *
+     * @return Collection
+     */
+    public static function getContractTypeById($contractTypeId): object
+    {
+        return DB::table('contract_types')
+            ->where('id','=',$contractTypeId)
+            ->first();
+    }
 }
