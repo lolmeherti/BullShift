@@ -7,6 +7,7 @@ use App\Models\ContractType;
 use App\Models\EmployeeAvailability;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeAvailabilityController extends Controller
 {
@@ -100,5 +101,24 @@ class EmployeeAvailabilityController extends Controller
         //
     }
 
+    /**
+     * @param EmployeeAvailabilityStatusEnum $status
+     * @param int $userId
+     */
+    public static function setAvailabilityStatus(EmployeeAvailabilityStatusEnum $status,int $userId)
+    {
+        EmployeeAvailability::where('user_fid', $userId)
+            ->update(['availability_status' => $status]);
+    }
 
+    /**
+     * When logging in, it validates the users email and sets their status to available
+     * @param int $userId
+     * @return void
+     */
+    public static function validateEmployeeAvailabilityStatus(int $userId): void
+    {
+        //set the status in employee availability to available by default
+        EmployeeAvailabilityController::setAvailabilityStatus(EmployeeAvailabilityStatusEnum::Active, $userId);
+    }
 }
