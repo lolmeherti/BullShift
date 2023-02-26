@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -56,5 +57,31 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Checks whether the user has successfully validated their account
+     * @param int $userId
+     * @return bool
+     */
+    public static function isValidatedUser(int $userId): bool
+    {
+        $validated = DB::table('users')
+            ->where('id','=', $userId)
+            ->value('email_verified_at');
+
+        return (bool)$validated;
+    }
+
+    /**
+     * Validates user profile
+     * @param int $userId
+     * @return void
+     */
+    public static function validateUserProfile(int $userId): void
+    {
+        DB::table('users')
+            ->where('id','=', $userId)
+            ->update(['email_verified_at' => now()]);
     }
 }
