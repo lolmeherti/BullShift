@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\EmployeeAvailabilityStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,4 +45,10 @@ class EmployeeAvailability extends Model
         'updated_at',
     ];
 
+    /**
+     * Availability Enum cast
+     */
+    protected $casts = [
+        'status' => EmployeeAvailabilityStatusEnum::class
+    ];
 }
