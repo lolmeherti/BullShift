@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->id();
+            $table->id()->index();
             $table->string('department')->unique();
             $table->tinyInteger('manager_user_fid')->nullable();
             $table->timestamps();

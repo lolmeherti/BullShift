@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('employee_availabilities', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_fid')->unique();
+            $table->id()->index();
+            $table->integer('user_fid')->unique()->index();
             $table->integer('contract_type_fid');
             $table->string('availability_status');
             $table->decimal('hours_worked_per_day');

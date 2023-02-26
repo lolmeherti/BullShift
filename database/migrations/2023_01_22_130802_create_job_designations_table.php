@@ -14,8 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('job_designations', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_fid');
+            $table->id()->index();
+            $table->integer('user_fid')->index();
             $table->integer('contract_type_fid');
             $table->string('designation');
             $table->timestamps();

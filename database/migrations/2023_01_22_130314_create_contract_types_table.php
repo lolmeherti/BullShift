@@ -14,8 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contract_types', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_fid');
+            $table->id()->index();
+            $table->integer('user_fid')->index();
             $table->string('contract_type');
             $table->decimal('min_hours_per_shift');
             $table->decimal('max_hours_per_week');
