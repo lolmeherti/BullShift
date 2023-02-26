@@ -1,20 +1,16 @@
 <x-app-layout>
-
     <x-slot name="header" class="p-2">
 
     </x-slot>
-
     <style>
         dialog[open] {
             overflow: hidden;
             animation: appear .15s cubic-bezier(0, 1.8, 1, 1.8);
         }
-
         dialog::backdrop {
             background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(54, 54, 54, 0.5));
             backdrop-filter: blur(3px);
         }
-
         @keyframes appear {
             from {
                 opacity: 0;
@@ -27,7 +23,6 @@
             }
         }
     </style>
-
     <dialog id="myModal" class="h-1/4 w-1/4  bg-gray-100 dark:bg-dark-eval-1 rounded-md border border-neutral-700 dark:border-neutral-700">
         <div class="flex flex-col w-full h-auto ">
             <!-- Header -->
@@ -37,7 +32,6 @@
                     id="deletion_warning">
                     Modal Header
                 </div>
-
                 <!--Header End-->
             </div>
             <!-- Modal Content-->
@@ -59,7 +53,6 @@
                         </svg>
                         <span class="sr-only">Loading...</span>
                     </div>
-
                     <a href="#" id="consent_to_deletion_button" data-modal-hide="popup-modal" type="button"
                        onclick="deleteRequest('/designation/delete')"
                        class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-purple-500 dark:bg-red-500 text-purple-50 inline-block">
@@ -67,7 +60,6 @@
                                 class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-400 dark:bg-red-400 group-hover:h-full opacity-90"></span>
                         <span class="relative group-hover:text-white" id="deletion_confirmation_button_text"> Yes, I'm sure</span>
                     </a>
-
                     <a href="#" data-modal-hide="popup-modal" id="deletion_cancel_button" type="button"
                        onclick="closeModal()"
                        class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-neutral-600 dark:bg-gray-600 text-purple-50 inline-block">
@@ -76,23 +68,18 @@
                         <span id="cancel_button_text" class="relative group-hover:text-white">No, cancel</span>
                     </a>
                 </div>
-
             </div>
             <!-- End of Modal Content-->
         </div>
     </dialog>
-
-
     <!-- this is the hidden input storing the id for deletion -->
     <input type="hidden" value="" name="pending_deletion_id" id="pending_deletion_id">
-
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg flex items-stretch">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <caption
                 class="p-5 text-xl font-semibold text-left bg-gray-50 dark:bg-dark-eval-1 dark:text-white text-gray-900">
                 Designations
                 <div class="grid grid-cols-2">
-
                     <div id="paragraph" class="col-start-1 col-end-2">
                         <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Create and manage
                             your designations.</p>
@@ -106,7 +93,6 @@
                         </a>
                     </div>
                 </div>
-
             </caption>
             <thead class="text-sm text-gray-100 uppercase bg-neutral-600 dark:bg-gray-700 text-gray-100 dark:text-gray-200">
             <tr>
@@ -130,15 +116,12 @@
                     <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-white">
                         {{$designation->designation}}
                     </th>
-
                     <td class="px-6 py-4">
                         {{$designation->contract_type}}
                     </td>
-
                     <td class="px-6 py-4">
                         0
                     </td>
-
                     <td class="px-6 py-4 text-right">
                         <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
                             <a href="{{url('/designation/'.$designation->id.'/edit')}}"
@@ -161,5 +144,4 @@
             </tbody>
         </table>
     </div>
-
 </x-app-layout>

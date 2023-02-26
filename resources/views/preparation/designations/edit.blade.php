@@ -1,21 +1,17 @@
 <x-app-layout>
-
     <x-slot name="header" class="p-2">
 
     </x-slot>
-
     @php
         $normalFormInputTheme = 'border dark:bg-gray-700 dark:border-gray-600 border-gray-300 dark:text-white bg-gray-100 dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 focus:ring-purple-500 focus:border-purple-500 text-gray-900';
         $alertFormInputTheme = 'border bg-red-100 text-gray-700 border-red-300 dark:placeholder-gray-400 dark:focus:border-purple-500 dark:focus:ring-purple-500 focus:ring-purple-500 focus:border-purple-500 text-gray-900';
     @endphp
-
     <div class="p-6 overflow-hidden bg-gray-50 dark:bg-dark-eval-1 rounded-md shadow-md">
         <form autocomplete="off" method="POST" action="{{url('/designation/'.$jobDesignation->id.'/update')}}">
             @csrf
             <caption class="text-gray-900 dark:text-white bg-gray-50 dark:bg-dark-eval-1 text-xl font-bold text-left">
                 <p class="text-xl font-semibold">
                     Editing a Designation
-
                 <ul id="loading_spinner_animated" class="pt-2 hidden">
                     <li class="flex items-center">
                         <svg aria-hidden="true" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,20 +21,17 @@
                         <span class="text-gray-500 bg:text-gray-500">Loading...</span>
                     </li>
                 </ul>
-
                 @if(session('success'))
                     <p class="text-green-400">{{session('success')}}</p>
                     @endif
                     </p>
             </caption>
             <div class="py-3">
-
             </div>
             <div class="mb-6">
                 <label for="designation" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Designation
                     <span class="text-gray-600 dark:text-gray-400"
                           style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
-
                 @if ($errors->has('designation'))
                     <input type="text" id="designation" value="{{old('designation')}}" maxlength="70" name="designation"
                            class="{{$alertFormInputTheme}} text-sm rounded-lg block w-full p-2.5"
@@ -51,12 +44,10 @@
                            placeholder="Accountant" required>
                 @endif
             </div>
-
             <div class="mb-6">
                 <label for="contract_type_fid" class="text-gray-900 dark:text-white block mb-2 text-sm font-medium">Contract
                     Type <span class="text-gray-600 dark:text-gray-400"
                                style="font-style: italic; font-size:0.8em">{{ "(required)" }}</span></label>
-
                 @if ($errors->has('contract_type_fid'))
                     <select id="contract_type_fid" name="contract_type_fid"
                             class="{{$alertFormInputTheme}} text-sm rounded-lg block w-full p-2.5">
@@ -74,7 +65,6 @@
                     </select>
                 @endif
             </div>
-
             <td class="px-6 py-4 text-right">
                 <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end py-4">
                     <button type="submit" id="create_button" onclick="showCreatingInProgress()"
