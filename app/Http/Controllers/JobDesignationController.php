@@ -135,9 +135,20 @@ class JobDesignationController extends Controller
      */
     public static function getAllJobDesignationsWithContract(): Collection
     {
+        //extensive group by because of mysql defaulting on the "ONLY_FULL_GROUP_BY" config
         return DB::table('job_designations')
             ->leftJoin('contract_types', 'job_designations.contract_type_fid', '=', 'contract_types.id')
-            ->select('job_designations.*', 'contract_types.contract_type')
+            ->leftJoin('employees', 'job_designations.id', '=', 'employees.designation_fid')
+            ->select('job_designations.*', 'contract_types.contract_type', DB::raw('COUNT(employees.id) as employee_count'))
+            ->groupBy(
+                'job_designations.id',
+                'job_designations.user_fid',
+                'job_designations.contract_type_fid',
+                'job_designations.designation',
+                'job_designations.created_at',
+                'job_designations.updated_at',
+                'contract_types.contract_type',
+            )
             ->orderBy('designation')
             ->get();
     }

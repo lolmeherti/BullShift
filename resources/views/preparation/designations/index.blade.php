@@ -120,7 +120,7 @@
                         {{$designation->contract_type}}
                     </td>
                     <td class="px-6 py-4">
-                        0
+                        {{$designation->employee_count}}
                     </td>
                     <td class="px-6 py-4 text-right">
                         <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">

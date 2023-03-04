@@ -124,7 +124,7 @@
                         {{$department->manager_name}}
                     </td>
                     <td class="px-6 py-4">
-                        0
+                        {{$department->employee_count}}
                     </td>
                     <td class="px-6 py-4 text-right">
                         <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">

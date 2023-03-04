@@ -148,7 +148,26 @@ class ContractTypeController extends Controller
      */
     public static function getAllContractTypes(): Collection
     {
+        //unfortunately the DB is configured with "ONLY_FULL_GROUP_BY" by default
+        //and at the moment, it is more difficult to keep track of DB configs
+        //than it is to just add all the columns to the eloquent query
+        //which is why this happened
        return DB::table("contract_types")
+           ->select('contract_types.*',DB::raw('(SELECT COUNT(*) FROM employees WHERE employees.contract_type_fid = contract_types.id) as employee_count'))
+           ->leftJoin('employees','employees.contract_type_fid','=','contract_types.id')
+           ->groupBy(
+               'contract_types.id',
+               'contract_types.user_fid',
+               'contract_types.contract_type',
+               'contract_types.min_hours_per_shift',
+               'contract_types.max_hours_per_week',
+               'contract_types.break_length_in_minutes',
+               'contract_types.break_included',
+               'contract_types.days_of_vacation_per_year',
+               'contract_types.created_at',
+               'contract_types.updated_at',
+
+           )
            ->orderBy('contract_type')
            ->get();
     }

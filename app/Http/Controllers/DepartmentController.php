@@ -151,7 +151,16 @@ class DepartmentController extends Controller
     {
         return DB::table('departments')
             ->leftJoin('users', 'departments.manager_user_fid', '=', 'users.id')
-            ->select('departments.*', 'users.name as manager_name')
+            ->leftJoin('employees', 'departments.id', '=', 'employees.department_fid')
+            ->select('departments.*', 'users.name as manager_name', DB::raw('COUNT(employees.id) as employee_count'))
+            ->groupBy(
+                'departments.id',
+                'departments.department',
+                'departments.manager_user_fid',
+                'departments.created_at',
+                'departments.updated_at',
+                'users.name',
+            )
             ->orderBy('department')
             ->get();
     }

@@ -38,6 +38,7 @@ class EmployeeController extends Controller
             ->leftJoin('users as u','e.user_fid', '=','u.id')
             ->leftJoin('job_designations as d','e.designation_fid','=','d.id')
             ->select('u.id as id','u.name','u.email','u.email_verified_at','u.created_at as date_sent','d.designation')
+            ->orderBy('u.name')
             ->get();
 
         return view('preparation.invitations.index',compact('invitedUsers'));

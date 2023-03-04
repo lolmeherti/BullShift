@@ -83,7 +83,6 @@
         </div>
     </dialog>
 
-
     <!-- this is the hidden input storing the id for deletion -->
     <input type="hidden" value="" name="pending_deletion_id" id="pending_deletion_id">
 
@@ -132,6 +131,7 @@
             @foreach($contracts as $contract)
                 <tr class="bg-gray-50 border-b dark:bg-dark-eval-1 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:bg-opacity-70 hover:bg-gray-100 hover:bg-opacity-50"
                     id="table_row_id{{$contract->id}}">
+
                     <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-white">
                         {{$contract->contract_type}}
                     </th>
@@ -145,7 +145,7 @@
                     </td>
 
                     <td class="px-6 py-4">
-                        0
+                        {{$contract->employee_count}}
                     </td>
                     <td class="px-6 py-4 text-right">
                         <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
@@ -170,5 +170,4 @@
             </tbody>
         </table>
     </div>
-
 </x-app-layout>
