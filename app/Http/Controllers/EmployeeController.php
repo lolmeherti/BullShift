@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InvitationEmail;
+use App\Models\ContractType;
 use App\Models\Employee;
+use App\Models\JobDesignation;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use OpenSpout\Common\Exception\InvalidArgumentException;
+use OpenSpout\Common\Exception\IOException;
+use OpenSpout\Common\Exception\UnsupportedTypeException;
+use OpenSpout\Writer\Exception\WriterNotOpenedException;
+use Rap2hpoutre\FastExcel\FastExcel;
+use Rap2hpoutre\FastExcel\SheetCollection;
 
 class EmployeeController extends Controller
 {
@@ -190,5 +200,52 @@ class EmployeeController extends Controller
             Mail::to($email)->send(new InvitationEmail($email, $unHashedPassword, $name));
         }
         return $user->id ?? 0;
+    }
+
+    /**
+     * This function renders the invitations upload view
+     *
+     * @return View
+     */
+    public function importView(): View
+    {
+        return view('preparation.invitations.group_invitations');
+    }
+
+    /**
+     * This function is used to download the invitation excel template
+     *
+     * @return
+     */
+    public function downloadInvitationsExcelTemplate()
+    {
+        $template = collect([
+            ['Name'=>'', 'Email'=>'','Designation_Id' => '','Contract_Id' => '','Remaining_Vacation_Days' => '','Department_Id' => '','Wage' => '']
+        ]);
+
+        $designations = JobDesignation::select(DB::raw("CONCAT(designation, '_',id) as Designation"))->get();
+        $contracts = ContractType::select(DB::raw("CONCAT(contract_type, '_',id) as Contracts"))->get();
+
+        $sheets = new SheetCollection([
+            'Template' => $template,
+            'Designations' => $designations,
+            'Contracts' => $contracts
+        ]);
+
+        try {
+           $excelFile =  (new FastExcel($sheets));
+           return $excelFile->download('InvitationsTemplate.xlsx');
+        } catch (IOException|InvalidArgumentException|UnsupportedTypeException|WriterNotOpenedException $e) {
+        }
+    }
+
+    /**
+     * This function is used to import users from a CSV file
+     * @param $csv
+     * @return void
+     */
+    private function import($csv): void
+    {
+
     }
 }
