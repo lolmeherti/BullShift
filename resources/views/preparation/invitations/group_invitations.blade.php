@@ -181,30 +181,5 @@
 </x-app-layout>
 
 <script>
-    let fileInput = document.getElementById('InvitationFileUpload');
-
-    function showUploadButton() {
-        if (fileInput.files == null || fileInput.files.length === 0) {
-            document.getElementById("invitationsUploadButton").style.display = "none";
-        } else {
-            document.getElementById("invitationsUploadButton").style.display = "block";
-        }
-    }
-
-    let downloadExcelInvitationTemplate = () => {
-        axios({
-            method: 'get',
-            url: '/invitations/template/download',
-            responseType: 'blob'
-        })
-            .then(function (response) {
-                const url = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', 'InvitationsTemplate.xlsx');
-                document.body.appendChild(link);
-                link.click();
-            });
-    }
-
+    let fileInput=document.getElementById("InvitationFileUpload");function showUploadButton(){null==fileInput.files||0===fileInput.files.length?document.getElementById("invitationsUploadButton").style.display="none":document.getElementById("invitationsUploadButton").style.display="block"}let downloadExcelInvitationTemplate=()=>{axios({method:"get",url:"/invitations/template/download",responseType:"blob"}).then(function(a){const b=window.URL.createObjectURL(new Blob([a.data])),c=document.createElement("a");c.href=b,c.setAttribute("download","InvitationsTemplate.xlsx"),document.body.appendChild(c),c.click()})};
 </script>
