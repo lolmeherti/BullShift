@@ -165,14 +165,11 @@ class ContractTypeController extends Controller
                'contract_types.break_included',
                'contract_types.days_of_vacation_per_year',
                'contract_types.created_at',
-               'contract_types.updated_at',
-
-           )
+               'contract_types.updated_at')
            ->orderBy('contract_type')
            ->get();
     }
-
-
+    
     /**
      * Fetches a contract type by its id.
      *
