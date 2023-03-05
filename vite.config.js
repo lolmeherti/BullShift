@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import { compression } from 'vite-plugin-compression2'
+import { compression } from 'vite-plugin-compression2';
 
 export default defineConfig({
     plugins: [
