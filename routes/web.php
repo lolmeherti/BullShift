@@ -34,14 +34,12 @@ Route::get('/index', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //ROUTES FOR PROFILE SETTINGS
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //ROUTES FOR CONTRACT TYPES
@@ -77,6 +75,9 @@ Route::middleware('auth')->group(function () {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //ROUTES FOR EMPLOYEES AND THEIR INVITATIONS
     Route::get('/invitations', [EmployeeController::class, 'invitationsIndex'])->name('preparation.invitations.index');
+    Route::get('/invitations/import/view', [EmployeeController::class, 'importView'])->name('preparation.invitations.importView');
+    Route::get('/invitations/template/download', [EmployeeController::class, 'downloadInvitationsExcelTemplate']);
+    Route::post('/invitations/import', [EmployeeController::class, 'import'])->name('preparation.invitations.import');
     Route::get('/invitation/create', [EmployeeController::class, 'create'])->name('preparation.invitations.create');
     Route::post('/employee/store', [EmployeeController::class, 'store'])->name('preparation.employee.store');
     Route::get('/invitation/{employee}/edit', [EmployeeController::class, 'edit']);
