@@ -10,10 +10,12 @@
             overflow: hidden;
             animation: appear .15s cubic-bezier(0, 1.8, 1, 1.8);
         }
+
         dialog::backdrop {
             background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(54, 54, 54, 0.5));
             backdrop-filter: blur(3px);
         }
+
         @keyframes appear {
             from {
                 opacity: 0;
@@ -24,6 +26,7 @@
                 transform: translateX(0);
             }
         }
+
         .dataTables_filter {
             display: none;
         }
@@ -90,26 +93,34 @@
                     <div id="paragraph" class="col-start-1 col-end-2">
                         <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Create and manage
                             your invitations.</p>
-
-                    <div class="flex">
-                        <div class="flex-1 ...">
-                            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                            <div class="relative pt-2">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none pt-2">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <div class="flex">
+                            <div class="flex-1 ...">
+                                <label for="default-search"
+                                       class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                                <div class="relative pt-2">
+                                    <div
+                                        class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none pt-2">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                             fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <input type="search" id="default-search" style="font-weight: lighter;"
+                                           class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500"
+                                           placeholder="Search Employee" required>
                                 </div>
-                                <input type="search" id="default-search" style="font-weight: lighter;" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500" placeholder="Search Employee" required>
                             </div>
-                        </div>
                             <div class="flex-1 ..."></div>
-                    </div>
+                        </div>
                     </div>
                     <div style="justify-self: end;" id="button" class="col-start-2 col-end-3 justify-items-end">
-                        <a href="{{route('preparation.invitations.create')}}"
+                        <a href="{{route('preparation.invitations.importView')}}"
                            class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-green-600 text-purple-50 inline-block">
                             <span
                                 class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out bg-green-500 transform translate-y-0 group-hover:h-full opacity-90"></span>
-                            <span class="relative group-hover:text-white">CSV Import</span>
+                            <span class="relative group-hover:text-white">Group Invite</span>
                         </a>
                         <a href="{{route('preparation.invitations.create')}}"
                            class="px-5 py-1.5 relative rounded group overflow-hidden font-medium bg-green-600 text-purple-50 inline-block">
@@ -250,7 +261,7 @@
         });
 
         $('#default-search').on('keyup', function () {
-            table.search( this.value ).draw();
+            table.search(this.value).draw();
         });
 
         document.getElementById('data_table_wrapper').classList.add('w-full');
