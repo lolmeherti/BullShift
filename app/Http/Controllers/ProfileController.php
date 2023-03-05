@@ -67,7 +67,7 @@ class ProfileController extends Controller
     public static function isValidatedUser(int $userId): bool
     {
         $validated = DB::table('users')
-            ->where('id','=', $userId)
+            ->where('id', '=', $userId)
             ->value('email_verified_at');
 
         return (bool)$validated;
@@ -81,7 +81,7 @@ class ProfileController extends Controller
     public static function validateUserProfile(int $userId): void
     {
         DB::table('users')
-            ->where('id','=', $userId)
+            ->where('id', '=', $userId)
             ->update(['email_verified_at' => now()]);
     }
 }
