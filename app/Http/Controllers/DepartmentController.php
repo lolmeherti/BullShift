@@ -52,8 +52,8 @@ class DepartmentController extends Controller
         ]);
 
         $department = new Department();
-        $department->department = (string) $request->input('department');
-        $department->manager_user_fid = (int) $request->input('manager_user_fid');
+        $department->department = (string)$request->input('department');
+        $department->manager_user_fid = (int)$request->input('manager_user_fid');
 
         $department->save();
 
@@ -98,8 +98,8 @@ class DepartmentController extends Controller
             'department' => 'required|max:255',
         ]);
 
-        $department->department = (string) $request->input('department');
-        $department->manager_user_fid = (int) $request->input('manager_user_fid');
+        $department->department = (string)$request->input('department');
+        $department->manager_user_fid = (int)$request->input('manager_user_fid');
 
         $department->save();
 
@@ -115,8 +115,7 @@ class DepartmentController extends Controller
     public function destroy(Request $request): void
     {
         //
-        if($request->input('id'))
-        {
+        if ($request->input('id')) {
             Department::destroy($request->input('id'));
         }
     }
@@ -175,11 +174,11 @@ class DepartmentController extends Controller
     {
         $managerName = $request->input('query');
 
-        if($managerName) {
-            $managers = DB::table('users')->select('name','email','id')
-                ->where('name','like','%'.$managerName.'%')->get();
+        if ($managerName) {
+            $managers = DB::table('users')->select('name', 'email', 'id')
+                ->where('name', 'like', '%' . $managerName . '%')->get();
         } else {
-            $managers = DB::table('users')->select('name','email','id')->get();
+            $managers = DB::table('users')->select('name', 'email', 'id')->get();
         }
 
         return response()->json([
