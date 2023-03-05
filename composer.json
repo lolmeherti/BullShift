@@ -1,9 +1,14 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "BullShift",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "lolmeherti"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "blade-ui-kit/blade-heroicons": "^1.2",
@@ -12,7 +17,9 @@
         "intervention/image": "^2.7",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "openspout/openspout": "^4.12",
+        "rap2hpoutre/fast-excel": "^5.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
