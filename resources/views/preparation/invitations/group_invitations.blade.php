@@ -5,10 +5,21 @@
 
     <div
         class="bg-gray-50 dark:bg-dark-eval-1 p-6 overflow-hidden rounded-md shadow-md text-gray-500 dark:text-gray-400">
+        <p class="text-2xl font-semibold">Group Invitation
+        <ul id="loading_spinner_animated" class="pt-2 pl-5 hidden">
+            <li class="flex items-center">
+                <svg aria-hidden="true" class="inline w-5 h-5 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                </svg>
+                <span class="text-gray-500 bg:text-gray-500">Loading...</span>
+            </li>
+        </ul></p>
 
-        <p class="text-2xl font-semibold py-6">Group Invitation</p>
-
-        <div class="mt-8  md:mt-0 md:ml-10 md:w-2/3">
+        @if(session('success'))
+            <p class="text-green-400" id="creation_success_message">{{session('success')}}</p>
+        @endif
+        <div class="mt-8  md:mt-0 md:ml-10 md:w-2/3 pt-6">
             <div class="relative flex pb-6">
                 <div class="absolute inset-0 flex h-full w-10 items-center justify-center">
                     <div class="pointer-events-none h-full w-1 bg-gray-200"></div>
@@ -87,7 +98,6 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                     </svg>
-
                 </div>
                 <div class="flex-grow pl-4">
                     <h2 class="title-font mb-1 text-sm font-medium tracking-wider text-gray-500 dark:text-gray-300 font-semibold">STEP
@@ -100,7 +110,7 @@
             </div>
         </div>
 
-        <form autocomplete="off" method="POST" action="{{ route('preparation.invitations.import') }}"
+        <form autocomplete="off" method="POST" enctype="multipart/form-data" action="{{ route('preparation.invitations.import') }}"
               class="flex justify-center">
             @csrf
             <div class="grid grid-rows-2 grid-cols-1 grid-flow-col gap-4 w-3/4">
@@ -108,7 +118,7 @@
                     <div class="flex flex-col flex-grow">
                         <div x-data="{ files: null }"
                              class="hover:bg-gray-100 dark:hover:bg-dark-eval-3 block w-full py-1 px-3 relative dark:bg-dark-eval-2 appearance-none border-2 dark:border-gray-600 border-gray-300 border-solid rounded-md hover:shadow-outline-gray">
-                            <input type="file" id="InvitationFileUpload"
+                            <input type="file" id="InvitationFileUpload" name="InvitationFileUpload"
                                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                                    onchange="showUploadButton()"
                                    class="absolute inset-0 z-50 m-0 p-0 w-full h-full outline-none opacity-0"
@@ -156,11 +166,11 @@
                 </div>
 
                 <div class="flex items-baseline justify-center">
-                    <button type="button" id="invitationsUploadButton" name="invitationsUploadButton"
+                    <button type="submit" id="create_button" name="create_button" onclick="showCreatingInProgress()"
                             style="display:none;"
-                            class="px-5 py-1 relative rounded group overflow-hidden font-medium text-purple-50 bg-purple-500 dark:bg-purple-500 inline-block">
-                        <span
-                            class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-400 dark:bg-purple-400 group-hover:h-full opacity-90"></span>
+                            class="px-5 py-1 relative rounded group overflow-hidden font-medium text-purple-50 bg-green-600 inline-block">
+                        <span id="create_button_highlighted"
+                            class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-green-500 group-hover:h-full opacity-90"></span>
                         <span class="relative group-hover:text-white">
                             <div class="flex flex-row">
                                 <div class="basis-1/4 px-4 py-1 text-lg">Upload</div>
@@ -181,5 +191,5 @@
 </x-app-layout>
 
 <script>
-    let fileInput=document.getElementById("InvitationFileUpload");function showUploadButton(){null==fileInput.files||0===fileInput.files.length?document.getElementById("invitationsUploadButton").style.display="none":document.getElementById("invitationsUploadButton").style.display="block"}let downloadExcelInvitationTemplate=()=>{axios({method:"get",url:"/invitations/template/download",responseType:"blob"}).then(function(a){const b=window.URL.createObjectURL(new Blob([a.data])),c=document.createElement("a");c.href=b,c.setAttribute("download","InvitationsTemplate.xlsx"),document.body.appendChild(c),c.click()})};
+    let fileInput=document.getElementById("InvitationFileUpload");function showUploadButton(){null==fileInput.files||0===fileInput.files.length?document.getElementById("create_button").style.display="none":document.getElementById("create_button").style.display="block"}let downloadExcelInvitationTemplate=()=>{axios({method:"get",url:"/invitations/template/download",responseType:"blob"}).then(function(a){const b=window.URL.createObjectURL(new Blob([a.data])),c=document.createElement("a");c.href=b,c.setAttribute("download","InvitationsTemplate.xlsx"),document.body.appendChild(c),c.click()})};
 </script>
