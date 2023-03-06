@@ -23,10 +23,13 @@ class EmployeeAvailabilityController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @param int $userId
+     * @param int $contractTypeId
+     * @param int $vacationDaysLeft
      *
      * @return bool
      */
-    public static function create($userId, $contractTypeId, $vacationDaysLeft): bool
+    public static function create(int $userId, int $contractTypeId, int $vacationDaysLeft): bool
     {
         $contract = ContractTypeController::getContractTypeById($contractTypeId);
 
