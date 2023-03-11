@@ -216,7 +216,7 @@ class EmployeeController extends Controller
     {
         $validator = Validator::make($employee, [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|unique:users|email|max:255',
             'designation_id' => 'required|string',
             'contract_id' => 'required|string',
             'remaining_vacation_days' => 'required|integer',
@@ -320,9 +320,13 @@ class EmployeeController extends Controller
 
         $invitedEmployees = $this->parseInvitedEmployeesFromCsv($request);
 
+        $currentRow = 1; //starts at 1 because the first row is headers
+        $errorsInRow = []; //these are the invalid rows
         foreach ($invitedEmployees as $employee) {
+            $currentRow += 1;
             //validate CSV data
             if (!$this->isValidEmployee($employee)) {
+                $errorsInRow[] = $currentRow;
                 continue;
             }
 
@@ -334,6 +338,15 @@ class EmployeeController extends Controller
             }
 
             $this->saveEmployeeDataFromCsv($userId, $employee);
+        }
+
+        if(count($errorsInRow) > 0)
+        {
+            return redirect()->back()->with([
+                'fragmented_employee_rows'=>'Fragmented or duplicated employee(s) data found in your file on rows:',
+                'rows' => $errorsInRow,
+                'fragmented_employee_instruction' => 'Please verify the validity of these rows!'
+            ]);
         }
 
         return redirect()->back()->with(['success'=>'Invitations sent successfully!']);
