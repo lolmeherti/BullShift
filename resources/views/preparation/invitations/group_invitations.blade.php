@@ -19,6 +19,13 @@
         @if(session('success'))
             <p class="text-green-400" id="creation_success_message">{{session('success')}}</p>
         @endif
+        @if(session('fragmented_employee_rows'))
+            <p class="text-red-400" id="creation_success_message">{{session('fragmented_employee_rows')}}
+            @foreach(session('rows') as $key => $row)
+                    {{$row.' '}}
+            @endforeach
+            </p>
+        @endif
         <div class="mt-8  md:mt-0 md:ml-10 md:w-2/3 pt-6">
             <div class="relative flex pb-6">
                 <div class="absolute inset-0 flex h-full w-10 items-center justify-center">
@@ -34,7 +41,7 @@
                     <h2 class="title-font mb-1 text-sm font-medium tracking-wider text-gray-500 dark:text-gray-300 font-semibold">STEP
                         1</h2>
                     <p class="font-laonoto leading-relaxed pb-3">
-                        To invite multiple users at once, you can upload a CSV (comma-separated values) file
+                        To invite <b>multiple users (3+)</b> at once, you can upload a CSV (comma-separated values) file
                         containing their information <br />
                         <b>Please download our template.</b>
                     </p>
